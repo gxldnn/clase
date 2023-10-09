@@ -17,6 +17,13 @@ function test-email() {
                 return 1
         fi
 }
+function passwd-check() {
+        if [[ "$passwd" == "$passwd2" ]]; then
+                return 0
+        else
+                return 1
+        fi
+} 
 
 
 #//////////////////////////////////
@@ -33,7 +40,16 @@ echo -e "Bienvenido a RIMOGO enterprise, ha ejecutado el programa para darse de 
 echo -e "Diganos el nombre de usuario que quiere"
 read user
 echo -e "Su contraseña:"
-read -s passwd
+while true; do
+        read passwd
+        read passwd2
+        passwd-check
+        if [ $? -eq 0 ]; then
+                break
+        else
+                echo "La contraseña no coincide, introduzcala de nuevo"
+         fi
+done
 echo -e "Que nombre quiere para tu pagina web ej. jaime.com"
 read domain
 
@@ -50,21 +66,6 @@ while true; do
 
 done
 
-echo
-
-echo -e "Necesitamos un poco mas de informacion para que tu sitio sea mas seguro"
-echo -e "De que pais es tu empresa? ej. ES"
-read countryname
-echo -e "De que provincia o estado es?"
-read statename
-echo -e "De que ciudad eres?"
-read city
-echo -e "Como se llama tu compañia?"
-read companyname
-echo -e "En que sector se centra?"
-read unitname
-
-echo -e "\n Muy bien, la informacion que nos ha proporcionado es correcta, su web esta en proceso de crearse, espere."
 
 
 #/////////////////////////////////
@@ -74,6 +75,8 @@ echo -e "\n Muy bien, la informacion que nos ha proporcionado es correcta, su we
 #//
 #//
 
+
+CHROOTDIR=/var/www/$domain
 LOGFILE="/etc/nginx/logs/$domain.log"
 ERRFILE="/etc/nginx/logs/$domain.err"
 void=""
@@ -85,11 +88,11 @@ mkdir -p /var/www/"$domain"/html
 echo -e "<h1>Sitio web de "$user"</h1>" > /var/www/"$domain"/html/index.html
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/"$domain".key -out /etc/ssl/certs/"$domain".crt <<EOF >>$LOGFILE 2>$ERRFILE
-$countryname
-$statename
-$city
-$companyname
-$unitname
+ES
+SPAIN
+BCN
+IJR Security Manager
+IJR Security Manager
 $domain
 $email
 EOF
@@ -126,22 +129,13 @@ systemctl restart nginx.service >>$LOGFILE 2>$ERRFILE
 
 
 #// SFTP ACCESS SCRIPT
-
-useradd "$user"
-echo "$user:$passwd" | chpasswd
-
-echo -e "Match Group $user
-\tX11Forwarding no
-\tAllowTcpForwarding no
-\tPermitTTY no
-\tForceCommand internal-sftp
-\tPasswordAuthentication yes
-\tChrootDirectory /var/www/$domain
-\tPermitTunnel no
-\tAllowAgentForwarding no" >> /etc/ssh/sshd_config
-
-chmod 755 /var/www/"$domain"
-chmod 775 /var/www/"$domain"/html
-chown -R root:"$user" /var/www/"$domain"
-
-systemctl restart sshd
+read user
+read domain
+CHROOTDIR=/var/www/$domain
+useradd -m -d $CHROOTDIR $user
+if [ ! -f "$CHROOTDIR/.ssh/id_rsa" ]; then
+    sudo -u $user ssh-keygen -t rsa -b 4096 -N "" -f "$CHROOTDIR/.ssh/id_rsa"
+fi
+chmod 700 "$CHROOT_DIR/.ssh"
+chmod 600 "$CHROOT_DIR/.ssh/authorized_keys"
+cat "$CHROOT_DIR/.ssh/id_rsa.pub" >> "$CHROOT_DIR/.ssh/authorized_keys"
