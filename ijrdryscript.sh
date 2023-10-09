@@ -7,7 +7,8 @@ clear
 #//
 #//
 
-apt install nginx >> /dev/null
+apt install nginx
+apt install ssh
 function test-email() {
         local validezemail="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
