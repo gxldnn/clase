@@ -7,7 +7,7 @@ clear
 #//
 #//
 
-
+apt install nginx >> /dev/null
 function test-email() {
         local validezemail="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
