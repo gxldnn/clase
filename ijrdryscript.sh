@@ -7,11 +7,7 @@ clear
 #//
 #//
 
-apt install nginx
-apt install ssh
-dw
-darsea
-dw
+
 function test-email() {
         local validezemail="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 
@@ -82,7 +78,7 @@ LOGFILE="/etc/nginx/logs/$domain.log"
 ERRFILE="/etc/nginx/logs/$domain.err"
 void=""
 mkdir -p /etc/nginx/logs
-
+apt install ssh >/devnull 2>&1
 #// WEB SERVER SCRIPT
 
 mkdir -p /var/www/"$domain"/html
