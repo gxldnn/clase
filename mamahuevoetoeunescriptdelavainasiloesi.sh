@@ -86,7 +86,7 @@ function newcomer() {
                 fi
             done
             echo
-            echo -n "Vuelve a introducir la conrtaseña: "
+            echo -n "Vuelve a introducir la contraseña: "
             PROMPT=""
             while IFS= read -p "$PROMPT" -r -s -n 1 CHAR
             do
@@ -119,11 +119,7 @@ function newcomer() {
     done
     useradd -m "$user" >>/dev/null 2>&1
     passwd "$user" <<< "$passwd"$'\n'$passwd >>/dev/null 2>&1
-
-    # Directory creation
-
-    mkdir -p /var/www/$domain/html
-    
+       
     echo -e " Cual es tu dominio?"
     read -p ">" domain
 
@@ -138,6 +134,9 @@ function newcomer() {
                 echo "El e-mail que has escrito no es correcto, por favor escribalo de nuevo."
         fi
     done
+    
+    # Directory creation
+    mkdir -p /var/www/$domain/html
 }
 function sftp_configuration() {
     
