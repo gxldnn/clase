@@ -75,7 +75,6 @@ done
 #//
 #//
 
-
 CHROOTDIR=/var/www/$domain
 LOGFILE="/etc/nginx/logs/$domain.log"
 ERRFILE="/etc/nginx/logs/$domain.err"
