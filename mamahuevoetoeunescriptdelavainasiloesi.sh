@@ -128,22 +128,21 @@ function newcomer() {
     read -p ">" domain
 
     while true; do
-        echo "Por favor escirba su email: "
+        echo "Por favor escriba su email: "
         read email
 
         test-email "$email"
         if [ $? -eq 0 ]; then
                 break
         else
-                echo "El Eemail que has escrito no es correcto, por favor escribalo de nuevo."
+                echo "El e-mail que has escrito no es correcto, por favor escribalo de nuevo."
         fi
     done
 }
 function sftp_configuration() {
     
     chmod 755 /var/www/$domain
-    chmod 755 /var/www/$domain/log
-    chmod -R 775 /var/www/$domain/html
+    chmod -R 775 /var/www/$domain/html/
    
     echo -e "
     Match Group $user
@@ -176,6 +175,16 @@ function vhost_http_server_config() {
 
     }" > /etc/nginx/sites-available/$domain
     cp /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
+    echo -e "<!DOCTYPE html>
+    <html lang="es">
+        <title>DHM S.L</title>
+        <body>
+            <h1>Bienvenido a tu dominio!</h1>
+            <p>Esta es la pagina default de $user, 
+            para editar tu pagina web entra por SFTP.</p>
+        </body>
+    </html>" > /var/www/$domain/html/index.html
+    
 }
 function vhost_https_server_config() {
     echo -e "
@@ -204,13 +213,15 @@ function vhost_https_server_config() {
         return 302 https://\$server_name\$request_uri;
     }" > /etc/nging/sites-available/$domain
     cp /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
-}
-function create_vhost() {
-    if [ "$execute_flag_ssk" -eq 1 ]; then
-        vhost_https_server_config
-    else
-        vhost_http_server_config
-    fi
+    echo -e "<!DOCTYPE html>
+    <html lang="es">
+        <title>DHM S.L</title>
+        <body>
+            <h1>Bienvenido a tu dominio!</h1>
+            <p>Esta es la pagina default de $user, 
+            para editar tu pagina web entra por SFTP.</p>
+        </body>
+    </html>" > /var/www/$domain/html/index.html
 }
 
 
@@ -222,9 +233,12 @@ newcomer
 sftp_configuration
 # Creation of a self-signed certificate
 ssl_ssk
-# Do not comment this line (automatic detection of https or http server, it will act based on if ssl_ssk is commented out)
-create_vhost
+# Do not comment this lines (automatic detection of https or http server, it will act based on if ssl_ssk is commented out)
+if [ "$execute_flag_ssk" -eq 1 ]; then
+        vhost_https_server_config
+    else
+        vhost_http_server_config
+fi
 
-systemctl restart sshd
-systemctl restart nginx
+systemctl restart nginx sshd
 nginx -t
