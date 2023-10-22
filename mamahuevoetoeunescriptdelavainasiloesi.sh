@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Este script ha sido desarrolado por IJRKLAN y MOSKA
+# Este script ha sido desarrollado por GOLDNN y MOSKA
 
 # La idea de este script es que sea lo mas maleable posible
 # para que cada persona que necesite utilizarlo pueda instalar
