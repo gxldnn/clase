@@ -44,6 +44,7 @@ function newcomer() {
             done
             echo
             echo -n "Vuelve a introducir la contraseña: "
+            CHARCOUNT=0
             PROMPT=""
             while IFS= read -p "$PROMPT" -r -s -n 1 CHAR
             do
