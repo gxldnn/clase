@@ -149,7 +149,7 @@ function sftp_configuration() {
         ChrootDirectory /var/www/$domain
         ForceCommand internal-sftp
         PubkeyAuthentication yes
-        PasswordAuthentication no
+        PasswordAuthentication yes
         PermitTTY no" >> /etc/ssh/sshd_config
 
     systemctl restart sshd
