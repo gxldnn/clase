@@ -9,6 +9,9 @@ function passwd-check() {
 
 
 function newcomer() {
+    clear
+    echo -e "$LMAGENTA"
+    echo -e "Bienvenido a el script modular de VHOSTING con SFTP hecho por IJR & MOSKA$RESET"
     echo -e "Por favor escriba su nombre de usuario"
     read -p ">" user
 
@@ -41,12 +44,11 @@ function newcomer() {
                 fi
             done
             echo
-            echo -n "Vuelve a introducir la conrtaseña: "
+            echo -n "Vuelve a introducir la contraseña: "
             PROMPT=""
             while IFS= read -p "$PROMPT" -r -s -n 1 CHAR
             do
                 if [[ $CHAR == $'\0' ]] ; then
-                    CHARCOUNT=0
                     break
                 fi
                 if [[ $CHAR == $'\177' ]] ; then

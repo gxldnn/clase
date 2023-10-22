@@ -143,6 +143,8 @@ function sftp_configuration() {
     
     chmod 755 /var/www/$domain
     chmod -R 775 /var/www/$domain/html/
+    chown -R root:$user /var/www/$domain/
+    
    
     echo -e "
     Match Group $user
