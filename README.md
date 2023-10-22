@@ -5,7 +5,7 @@
 - Apuntes y guias importantes
 - Y la demostracion de que me aburro mucho
 
-## Theme Showcase
+## Imagen
 
 <details><summary> <b>Abre esta imagen o te sentiras culpable</b></summary>
 
