@@ -131,16 +131,8 @@ function sftp_user_configuration() {
     systemctl restart sshd
 }
 function ssl_ssk() {
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/$domain.key -out /etc/ssl/certs/$domain.crt<<EOF >>$LOGFILE 2>$ERRFILE
-    ES
-    Catalunya
-    Barcelona
-    IJR & Moska Trust Services
-    IJR & Moska Trust Services
-    $domain
-    $email
-EOF
-    execute_flag_ssk=1
+        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/etc/ssl/private/$domain.key" -out "/etc/ssl/certs/$domain.crt" -subj "/C=ES/ST=Catalunya/L=Barcelona/O=IJR & Moska Trust Services/OU=IJR & Moska Trust Services/CN=$domain/emailAddress=$email"
+        execute_flag_ssk=1
 }
 function vhost_http_server_config() {
     echo -e "
