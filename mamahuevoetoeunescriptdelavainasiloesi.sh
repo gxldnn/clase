@@ -109,8 +109,10 @@ function newcomer() {
             echo "La contraseña que has escrito no es correcta, por favor escribela de nuevo."
         fi
     done
+    useradd -m "$user" >>/dev/null 2>&1
+    passwd "$user" <<< "$passwd"$'\n'$passwd >>/dev/null 2>&1
 }
-function sftp_user_configuration() {
+function sftp_configuration() {
     
     chmod 755 /var/www/$domain
     chmod 755 /var/www/$domain/log
@@ -124,13 +126,11 @@ function sftp_user_configuration() {
         PasswordAuthentication no
         PermitTTY no" >> /etc/ssh/sshd_config
 
-    useradd -m "$user" >>/dev/null 2>&1
-    passwd "$user" <<< "$passwd"$'\n'$passwd >>/dev/null 2>&1
     systemctl restart sshd
 }
 function ssl_ssk() {
-        openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/etc/ssl/private/$domain.key" -out "/etc/ssl/certs/$domain.crt" -subj "/C=ES/ST=Catalunya/L=Barcelona/O=IJR & Moska Trust Services/OU=IJR & Moska Trust Services/CN=$domain/emailAddress=$email"
-        execute_flag_ssk=1
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/etc/ssl/private/$domain.key" -out "/etc/ssl/certs/$domain.crt" -subj "/C=ES/ST=Catalunya/L=Barcelona/O=IJR & Moska Trust Services/OU=IJR & Moska Trust Services/CN=$domain/emailAddress=$email"
+    execute_flag_ssk=1
 }
 function vhost_http_server_config() {
     echo -e "
@@ -175,20 +175,24 @@ function  vhost_https_server_config() {
         server_name $domain www.$domain;
 
         return 302 https://\$server_name\$request_uri;
-    }"
+    }" > /etc/nging/sites-available/$domain
+    cp /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
 }
 function create_vhost() {
     if [ "$execute_flag_ssk" -eq 1 ]; then
-        vhost_http_server_config
-    else
         vhost_https_server_config
+    else
+        vhost_http_server_config
     fi
 }
 
+
 # Zona del script modular
 
+# User and passwd creation
+newcomer
 # Creation of an sftp user and password
-sftp_user_configuration
+sftp_configuration
 # Creation of a self-signed certificate
 ssl_ssk
 # Do not comment this line (automatic detection of https or http server, it will act based on if ssl_ssk is commented out)
