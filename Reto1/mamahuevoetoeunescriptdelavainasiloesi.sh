@@ -160,22 +160,6 @@ function sftp_configuration() {
 function ssl_ssk() {
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/etc/ssl/private/$domain.key" -out "/etc/ssl/certs/$domain.crt" -subj "/C=ES/ST=Catalunya/L=Barcelona/O=IJR & Moska Trust Services/OU=IJR & Moska Trust Services/CN=$domain/emailAddress=$email"
     execute_flag_ssk=1
-    echo -e """
-    ssl_protocols TLSv1.2;
-    ssl_prefer_server_ciphers on;
-    ssl_dhparam /etc/nginx/dhparam.pem;
-    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
-    ssl_ecdh_curve secp384r1; # Requires nginx >= 1.1.0
-    ssl_session_timeout  10m;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_tickets off; # Requires nginx >= 1.5.9
-    ssl_stapling on; # Requires nginx >= 1.3.7
-    ssl_stapling_verify on; # Requires nginx => 1.3.7
-    resolver 8.8.8.8 8.8.4.4 valid=300s;
-    resolver_timeout 5s;
-    add_header X-Frame-Options DENY;
-    add_header X-Content-Type-Options nosniff;
-    add_header X-XSS-Protection "1; mode=block";""" > /etc/nginx/snippets/ssl-params.conf
 }
 function vhost_http_server_config() {
     echo -e "
