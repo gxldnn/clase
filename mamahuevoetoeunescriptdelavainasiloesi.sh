@@ -89,6 +89,7 @@ function newcomer() {
             echo
             echo -n "Vuelve a introducir la contraseña: "
             PROMPT=""
+            CHARCOUNT=0
             while IFS= read -p "$PROMPT" -r -s -n 1 CHAR
             do
                 if [[ $CHAR == $'\0' ]] ; then
