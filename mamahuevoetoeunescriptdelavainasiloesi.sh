@@ -40,6 +40,15 @@ function passwd-check() {
                 return 1
         fi
 }
+function test-email() {
+        local validezemail="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+        if [[ "$email" =~ $validezemail ]]; then
+                return 0
+        else
+                return 1
+        fi
+}
 
 # Script
 function newcomer() {
@@ -111,6 +120,25 @@ function newcomer() {
     done
     useradd -m "$user" >>/dev/null 2>&1
     passwd "$user" <<< "$passwd"$'\n'$passwd >>/dev/null 2>&1
+
+    # Directory creation
+
+    mkdir -p /var/www/$domain/html
+    
+    echo -e " Cual es tu dominio?"
+    read -p ">" domain
+
+    while true; do
+        echo "Por favor escirba su email: "
+        read email
+
+        test-email "$email"
+        if [ $? -eq 0 ]; then
+                break
+        else
+                echo "El Eemail que has escrito no es correcto, por favor escribalo de nuevo."
+        fi
+    done
 }
 function sftp_configuration() {
     
@@ -150,7 +178,7 @@ function vhost_http_server_config() {
     }" > /etc/nginx/sites-available/$domain
     cp /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
 }
-function  vhost_https_server_config() {
+function vhost_https_server_config() {
     echo -e "
     server {
         listen 443 ssl;
