@@ -111,9 +111,7 @@ function newcomer() {
     done
 }
 function sftp_user_configuration() {
-    read user
-    read passwd
-
+    
     chmod 755 /var/www/$domain
     chmod 755 /var/www/$domain/log
     chmod -R 775 /var/www/$domain/html
@@ -195,6 +193,7 @@ sftp_user_configuration
 ssl_ssk
 # Do not comment this line (automatic detection of https or http server, it will act based on if ssl_ssk is commented out)
 create_vhost
+
 systemctl restart sshd
 systemctl restart nginx
 nginx -t
