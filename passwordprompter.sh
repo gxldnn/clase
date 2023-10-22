@@ -7,7 +7,6 @@ function passwd-check() {
         fi
 }
 
-
 function newcomer() {
     clear
     echo -e "$LMAGENTA"
@@ -76,3 +75,4 @@ function newcomer() {
         fi
     done
 }
+newcomer
