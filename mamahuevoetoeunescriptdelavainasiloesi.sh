@@ -52,6 +52,7 @@ function test-email() {
 
 # Script
 function newcomer() {
+    clear
     echo -e "$LMAGENTA"
     echo -e "Bienvenido a el script modular de VHOSTING con SFTP hecho por IJR & MOSKA$RESET"
     echo -e "Por favor escriba su nombre de usuario"
