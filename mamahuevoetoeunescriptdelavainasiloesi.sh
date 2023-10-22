@@ -211,7 +211,7 @@ function vhost_https_server_config() {
         server_name $domain www.$domain;
 
         return 302 https://\$server_name\$request_uri;
-    }" > /etc/nging/sites-available/$domain
+    }" > /etc/nginx/sites-available/$domain
     cp /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
     echo -e "<!DOCTYPE html>
     <html lang="es">
