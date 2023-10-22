@@ -91,7 +91,6 @@ function newcomer() {
             while IFS= read -p "$PROMPT" -r -s -n 1 CHAR
             do
                 if [[ $CHAR == $'\0' ]] ; then
-                    CHARCOUNT=0
                     break
                 fi
                 if [[ $CHAR == $'\177' ]] ; then
