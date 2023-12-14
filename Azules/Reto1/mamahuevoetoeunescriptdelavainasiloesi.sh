@@ -180,7 +180,6 @@ function vhost_http_server_config() {
     cp /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
     echo -e "<!DOCTYPE html>
     <html lang="es">
-        <title>DHM S.L</title>
         <body>
             <h1>Bienvenido a tu dominio!</h1>
             <p>Esta es la pagina default de $user, 
