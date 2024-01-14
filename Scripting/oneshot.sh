@@ -80,7 +80,7 @@ function direct_check {
 }
 
 clear
-oneshotttya
+oneshotttyx
 sleep 10 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Getting a Sleep"
 pacman -Sy >> $LOGFILE 2>$ERRFILE &
