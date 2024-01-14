@@ -4,14 +4,13 @@
 ##################################
 ##
 ##      COLORS && MoRE
-##dads
+##
 
 LOGFILE=$(pwd)/oneshotlog/logfile.log
 ERRFILE=$(pwd)/oneshotlog/errfile.err
 mkdir -p $(pwd)/oneshotlog
 touch $LOGFILE
 touch $ERRFILE
-
 
 RED="\e[31m"
 GREEN="\e[32m"
