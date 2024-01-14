@@ -4,7 +4,7 @@
 ##################################
 ##
 ##      COLORS && MoRE
-##
+##dads
 
 LOGFILE=$(pwd)/oneshotlog/logfile.log
 ERRFILE=$(pwd)/oneshotlog/errfile.err
