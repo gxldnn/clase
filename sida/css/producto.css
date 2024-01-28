@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+header {
+  background-color: #333;
+  padding: 18px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 42px;
+}
+
+header img {
+  width: 100px;
+}
+
+nav {
+  display: inline-block;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+.additional-links {
+  display: flex;
+  align-items: center;
+}
+
+.additional-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+.additional-links a.img:hover {
+  background-color: transparent;
+  color: white;
+  transition: none;
+}
+
+.additional-links a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 50px;
+  background-color: #0055ff;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.additional-links a.btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.additional-links img {
+  width: 40px;
+}
+
+.product-container {
+  display: flex;
+}
+
+.product-image {
+  flex: 1;
+}
+
+.product-image img {
+  width: 800px;
+  margin-left: 70px;
+}
+
+.product-details {
+  flex: 1;
+  padding: 20px;
+}
+
+.product-details h1 {
+  font-size: 50px;
+  margin-bottom: 0px;
+}
+
+.product-details p {
+  font-size: 25px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.price-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.price-button p {
+  margin-top: 50px;
+  text-align: start;
+  font-size: 35px;
+  color: #333;
+  font-weight: bold;
+}
+
+.price-button .btn {
+  justify-content: start;
+  padding: 20px 350px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.price-button .btn:hover {
+  background-color: #0056b3;
+}
+
+.contact-info {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.contact-info img {
+  width: 100px;
+  margin-right: 20px;
+}
+
+.contact-info ul {
+  font-size: 18px;
+  text-align: left;
+}
+
+.contact-info li b {
+  font-weight: bold;
+}

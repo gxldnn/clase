@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+header {
+  background-color: #333;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  width: 100px;
+}
+
+nav {
+  display: inline-block;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+.additional-links {
+  display: flex;
+  align-items: center;
+}
+
+.additional-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+/* Eliminar la regla de hover para la imagen del carrito */
+.additional-links a.img:hover {
+  background-color: transparent;
+  color: white;
+  transition: none;
+}
+
+.additional-links a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 50px;
+  background-color: #0055ff;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.additional-links a.btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.additional-links img {
+  width: 40px;
+}
