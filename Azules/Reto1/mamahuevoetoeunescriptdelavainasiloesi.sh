@@ -30,6 +30,9 @@ LCYAN="\e[96m"
 LGREY="\e[97m"
 BOLD="\e[1m"
 RESET="\e[0m"
+apt purge apache2 >/dev/null 2>&1
+rm -r /var/www/*
+apt install nginx >/dev/null 2>&1
 
 # Execution checkers & Basic functions
 execute_flag_ssk=0
