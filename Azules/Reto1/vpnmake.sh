@@ -62,7 +62,7 @@ function dot_check {
         ((dots++))
         sleep 0.5
     done
-
+s
     wait $1
     direct_check $? "$2"
 }
