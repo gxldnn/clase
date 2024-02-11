@@ -76,4 +76,3 @@ function newcomer() {
         fi
     done
 }
-newcomer
