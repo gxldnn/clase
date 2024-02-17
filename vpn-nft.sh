@@ -115,14 +115,13 @@ echo -e "Es cierta esta info?:"
 echo -e "IP red externa (publica)":$RED $remote_ip$RESET
 echo -e "IP de el servidor VPN":    $CYAN $vpn_ip$RESET
 echo -e "IP de el servidor CA:"       $GREEN $ca_ip$RESET
-read -n 1 -r -p "Presione [Enter] si es correcta, en el caso contrario presione [X]" check
+read -s -n 1 -r -p "Presione [Enter] si es correcta, en el caso contrario presione [X]" check
 
 if [[ $check == "x" ]]; then
-    echo "Operation cancelled."
+    echo -e "\n Operation cancelled."
     exit 1
 else
-    echo "Continuing..."
-    # Add your code here for what you want to do after pressing Enter
+    echo -n ""
 fi
    
 
