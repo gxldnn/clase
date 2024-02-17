@@ -158,7 +158,8 @@ echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt ro
 echo -e \"Una ve el ca.crt este en tu VPN COPIALO a /root/client-configs/keys\"
 "
 echo "$ca_script" > "ca.sh"
-echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 3333"
+chmod +x ca.sh
+echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
 nc -lvp 9000 -k -e ./ca.sh
 
 #ejecucion de script reomoto desde la vpn hacia el ca
