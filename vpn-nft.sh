@@ -67,10 +67,10 @@ function dot_check {
 function direct_check {
     case $1 in
         0)
-            printf "\r%-35s%s [ $GREEN$TICK$RESET ] done.\n" "$2" ""
+            printf '%-6s' "\r%-35s%s [ $GREEN$TICK$RESET ] done.\n" "$2" ""
             ;;
         *)
-            printf "\r%-35s%s [ $RED$CROSS$RESET ]̉̉\n Check the error at: $ERRFILE " "$2" ""
+            printf '%-6s' "\r%-35s%s [ $RED$CROSS$RESET ]̉̉\n Check the error at: $ERRFILE " "$2" ""
             exit
             ;;
     esac
