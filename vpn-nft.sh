@@ -131,7 +131,7 @@ screen
 #dot_check $! "Actualizando repos"
 
 
-#apt install -y curl openvpn easy-rsa >> $LOGFILE 2>$ERRFILE &
+#apt install -y curl openvpn easyrsa >> $LOGFILE 2>$ERRFILE &
 #dot_check $! "Instalando recursos"
 
 
@@ -141,7 +141,8 @@ screen
 
 
 ca_script="#!/bin/bash
-
+apt install -y easyrsa
+mkdir -p /root/easy-rsa
 cd /root/easy-rsa
 ./easyrsa init-pki
 
