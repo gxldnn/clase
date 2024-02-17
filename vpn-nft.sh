@@ -92,13 +92,27 @@ else
   exit 0
 fi
 
-apt update >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Getting a Sleep"
+
+echo -e "Paar poder montar el servidor openvpn es necesario recavar ciertos datos"
+read -p ">"
+
+
+
+
+
+
 
 
 apt update >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Pacman update"
+dot_check $! "Actualizando repos"
 
 
-apt update >> $LOGFILE 2>$ERRFILE &
-dot_check $! "List " 
+apt install -y curl openvpn easy-rsa >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Instalando recursos"
+
+
+mkdir -p /root/client-configs >> $LOGFILE 2>$ERRFILE &
+mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Creando directorios de trabajo" 
+
+./easyrsa
