@@ -153,7 +153,7 @@ dot_check $! "Retocando VARS"
 ca_script="#!/bin/bash
 apt-get install -y easy-rsa
 mkdir -p /root/easy-rsa
-cd /root/easy-rsa
+ln -s /usr/share/easy-rsa/* /root/easy-rsa/
 ./easyrsa init-pki
 echo -e \"set_var EASYRSA_REQ_COUNTRY    \\\"ES\\\"\" >> /root/easy-rsa/pki/vars
 echo -e \"set_var EASYRSA_REQ_PROVINCE   \\\"Barcelona\\\"\" >> /root/easy-rsa/pki/vars
