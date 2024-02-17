@@ -130,21 +130,21 @@ screen
 apt-get update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Actualizando repos"
 
-apt-get install -y curl openvpn easyrsa >> $LOGFILE 2>$ERRFILE &
+apt-get install -y curl openvpn easy-rsa >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Instalando recursos"
 
 mkdir -p /root/client-configs/keys
-mkdir -p /root/easyrsa
+mkdir -p /root/easy-rsa
 ln -s /usr/share/easy-rsa/* /root/easy-rsa/ >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Creando directorios de trabajo" 
 
 cd /root/easy-rsa/
-./easy-rsa init-pki >> $LOGFILE 2>$ERRFILE &
+./easyrsa init-pki >> $LOGFILE 2>$ERRFILE &
 
 echo -e "\\\"set_var EASYRSA_ALGO \\\"ec\\\"" > /root/easy-rsa/pki/vars
 echo -e "\\\"set_var EASYRSA_DIGEST \\\"sha512\\\"" >> /root/easy-rsa/pki/vars
 sleep 0.2
-dot_check $! "Configurando easyrsa"
+dot_check $! "Configurando easy-rsa"
 
 
 
@@ -152,7 +152,7 @@ dot_check $! "Configurando easyrsa"
 ################################CA REMOTE SCRIPT####################################
 ####################################################################################
 #ca_script="#!/bin/bash
-#apt install -y easyrsa
+#apt install -y easy-rsa
 #mkdir -p /root/easy-rsa
 #cd /root/easy-rsa
 #./easyrsa init-pki
