@@ -5,7 +5,7 @@
 ##
 ##      COLORS && MoRE
 ##
-
+cd
 LOGFILE=$(pwd)/vpnlog/logfile.log
 ERRFILE=$(pwd)/vpnlog/errfile.err
 mkdir -p $(pwd)/vpnlog
@@ -70,7 +70,7 @@ function direct_check {
             printf "\r%-35s%s [ $GREEN$TICK$RESET ] done.\n" "$2" ""
             ;;
         *)
-            printf "\r%-35s%s [ $RED$CROSS$RESET ]̉̉\n Check the error at: $ERRFILE ""$2" ""
+            printf "\r%-35s%s [ $RED$CROSS$RESET ]̉̉\n Check the error at: $ERRFILE " "$2" ""
             exit
             ;;
     esac
@@ -169,8 +169,9 @@ echo -e \"Una vez el ca.crt este en tu VPN COPIALO a \\\"/root/client-configs/ke
 "
 
 
-echo "$ca_script" > "ca.sh"
-chmod +x ca.sh
+echo "$ca_script" > /root/ca.sh
+chmod +x /root/ca.sh
+cd 
 nc -lp 9000 -k -e ./ca.sh >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Haz:[ nc$vpn_ip 9000 ] en el CA server" 
 
