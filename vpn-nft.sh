@@ -37,15 +37,12 @@ function cross {
 ##
 
 function oneshotttya(){
-    echo -ne "$GREEN     _       ___  __       _ ___ 
-    / ) )\ ) )_  (_ \` )_) / ) )  
-    (_/ (  ( (__ .__) ( ( (_/ ($RESET\n\n"
-}
-
-function oneshotttyx(){
-    echo -ne "$RED     _       ___  __       _ ___ 
-    / ) )\ ) )_  (_ \` )_) / ) )  
-    (_/ (  ( (__ .__) ( ( (_/ ($RESET\n\n"
+    echo -ne "$GREEN____   _____________________   
+\   \ /   /\______   \      \  
+ \   Y   /  |     ___/   |   \ 
+  \     /   |    |  /    |    \
+   \___/    |____|  \____|__  /
+                            \/ $RESET   [VPN VERSION]\n\n"
 }
 
 
