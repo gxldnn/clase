@@ -171,9 +171,7 @@ echo -e \"Una vez el ca.crt este en tu VPN COPIALO a \\\"/root/client-configs/ke
 
 echo "$ca_script" > "ca.sh"
 chmod +x ca.sh
-
 nc -lp 9000 -k -e ./ca.sh >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Ejecutando script remoto" 
-echo -n "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
+dot_check $! "Haz: nc $vpn_ip 9000 en el CA" 
 
 
