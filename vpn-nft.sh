@@ -76,6 +76,7 @@ function direct_check {
     esac
 }
 
+
 clear
 screen
 
@@ -83,6 +84,12 @@ screen
 #####################################SCRIPT#########################################
 ####################################################################################
 
+if [ "`ping -c 1 google.com`" ]
+then
+  break
+else
+  echo -e "[$RED WARNING$RESET ] Asegurate de que tienes ping antes de ejecutar el script (con resolucion DNS)."
+fi
 
 apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Getting a Sleep"
