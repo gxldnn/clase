@@ -112,9 +112,9 @@ clear
 
 screen
 echo -e "Es cierta esta info?:"
-echo -e "$RED IP red externa (publica)": $remote_ip
-echo -e "$BLUE IP de el servidor VPN":   $vpn_ip
-echo -e "$RED IP de el servidor CA:"     $ca_ip
+echo -e "IP red externa (publica)":$RED $remote_ip$RESET
+echo -e "IP de el servidor VPN":  $CYAN $vpn_ip$RESET
+echo -e "IP de el servidor CA:"    $GREEN $ca_ip$RESET
 read -n 1 -r -p "Presione [Enter] si es correcta, en el caso contrario presione [X]" check
 
 if [[ $check == "x" ]]; then
