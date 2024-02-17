@@ -6,9 +6,9 @@
 ##      COLORS && MoRE
 ##
 
-LOGFILE=$(pwd)/oneshotlog/logfile.log
-ERRFILE=$(pwd)/oneshotlog/errfile.err
-mkdir -p $(pwd)/oneshotlog
+LOGFILE=$(pwd)/vpnlog/logfile.log
+ERRFILE=$(pwd)/vpnlog/errfile.err
+mkdir -p $(pwd)/vpnlog
 touch $LOGFILE
 touch $ERRFILE
 
