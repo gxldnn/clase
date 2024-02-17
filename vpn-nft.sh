@@ -86,7 +86,7 @@ screen
 
 if [ "`timeout 0.2 ping -c 1 google.com`" ]
 then
-  break
+  echo -n ""
 else
   echo -e "[$RED WARNING$RESET ] Asegurate de que tienes ping antes de ejecutar el script (con resolucion DNS)."
 fi
