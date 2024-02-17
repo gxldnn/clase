@@ -86,7 +86,7 @@ screen
 
 if [ "`ping -c 1 google.com`" ]
 then
-  break
+  return 0
 else
   echo -e "[$RED WARNING$RESET ] Asegurate de que tienes ping antes de ejecutar el script (con resolucion DNS)."
 fi
