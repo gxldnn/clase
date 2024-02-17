@@ -45,13 +45,13 @@ function oneshotttya(){
 function oneshotttyx(){
     echo -ne "$RED     _       ___  __       _ ___ 
     / ) )\ ) )_  (_ \` )_) / ) )  
-    (_/ (  ( (__ .__) ( ( (_/ ($RESET $GREY[$YELLOW gxldnn $GREY X$MAGENTA MOSKA ]\n\n"
+    (_/ (  ( (__ .__) ( ( (_/ ($RESET\n\n"
 }
 
 
 function dot_check {
     echo -n $2
-    dots=0git 
+    dots=0
 
     while kill -0 $1 2>/dev/null; do
         if [ $dots -ge 4 ]; then
@@ -62,7 +62,7 @@ function dot_check {
         ((dots++))
         sleep 0.5
     done
-s
+
     wait $1
     direct_check $? "$2"
 }
