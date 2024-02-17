@@ -172,7 +172,7 @@ ln -s /usr/share/easy-rsa/* /root/easy-rsa/
 echo "$ca_script" > /root/ca.sh
 chmod +x /root/ca.sh
 cd 
-nc -lp 9000 -k -e ./ca.sh >> $LOGFILE 2>$ERRFILE &
+nc -lp 9000 -k  < /root/ca.sh >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Haz:[ nc$vpn_ip 9000 ] en el CA server" 
 
 
