@@ -108,9 +108,9 @@ clear
 
 screen
 echo -e "Es cierta esta info?:"
-echo -e "IP red externa (publica)":$RED $remote_ip$RESET
-echo -e "IP de el servidor VPN":    $CYAN $vpn_ip$RESET
-echo -e "IP de el servidor CA:"       $GREEN $ca_ip$RESET
+echo -e "IP red externa (publica):"$RED $remote_ip$RESET
+echo -e "IP de el servidor VPN:"   $CYAN $vpn_ip$RESET
+echo -e "IP de el servidor CA:"    $GREEN $ca_ip$RESET
 read -s -n 1 -r -p "Presione [Enter] si es correcta, en el caso contrario presione [X]" check
 
 if [[ $check == "x" ]]; then
@@ -158,7 +158,7 @@ echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt ro
 echo -e \"Una ve el ca.crt este en tu VPN COPIALO a /root/client-configs/keys\"
 "
 echo "$ca_script" > "ca.sh"
-echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
+echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 3333"
 nc -lvp 9000 -k -e ./ca.sh
 
 #ejecucion de script reomoto desde la vpn hacia el ca
