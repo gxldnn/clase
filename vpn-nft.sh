@@ -127,8 +127,8 @@ screen
 #####################################SCRIPT#########################################
 ####################################################################################
 
-apt update >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Actualizando repos"
+#apt update >> $LOGFILE 2>$ERRFILE &
+#dot_check $! "Actualizando repos"
 
 
 #apt install -y curl openvpn easy-rsa >> $LOGFILE 2>$ERRFILE &
@@ -138,3 +138,26 @@ dot_check $! "Actualizando repos"
 #mkdir -p /root/client-configs >> $LOGFILE 2>$ERRFILE &
 #mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
 #dot_check $! "Creando directorios de trabajo" 
+
+echo -e """#!/bin/bash
+cd /root/easy-rsa
+./easyrsa init-pki
+echo -e "set_var EASYRSA_REQ_COUNTRY    "ES"
+set_var EASYRSA_REQ_PROVINCE   "Barcelona"
+set_var EASYRSA_REQ_CITY       "Castelldefels"
+set_var EASYRSA_REQ_ORG        "BLAUS"
+set_var EASYRSA_REQ_EMAIL      "admin@admin.admin"
+set_var EASYRSA_REQ_OU         "2SMIX"
+set_var EASYRSA_ALGO           "ec"
+set_var EASYRSA_DIGEST         "sha512"" > /root/easy-rsa/pki/vars
+
+./easyrsa build-ca nopass
+""" > /root/ca.sh
+
+
+
+
+#ejecucion de script reomoto desde la vpn hacia el ca
+#nc -lvp -k -e ./scriptca.sh
+#en el ca
+#nc $vpn_ip (puerto)
