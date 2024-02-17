@@ -154,6 +154,8 @@ echo -e \"set_var EASYRSA_REQ_OU         \\\"2SMIX\\\"\" >> /root/easy-rsa/pki/v
 echo -e \"set_var EASYRSA_ALGO           \\\"ec\\\"\" >> /root/easy-rsa/pki/vars
 echo -e \"set_var EASYRSA_DIGEST         \\\"sha512\\\"\" >> /root/easy-rsa/pki/vars
 ./easyrsa build-ca nopass
+echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt root@$vpn_ip:/etc/openvpn/server/\"
+echo -e \"Una ve el ca.crt este en tu VPN$YELLOW COPIALO$RESET a /root/client-configs/keys\"
 "
 
 
