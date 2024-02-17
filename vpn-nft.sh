@@ -127,25 +127,33 @@ screen
 #####################################SCRIPT#########################################
 ####################################################################################
 
-#apt update >> $LOGFILE 2>$ERRFILE &
-#dot_check $! "Actualizando repos"
+apt update >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Actualizando repos"
+
+apt install -y curl openvpn easyrsa >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Instalando recursos"
+
+mkdir -p /root/client-configs/keys
+mkdir -p /root/easyrsa
+ln -s /usr/share/easy-rsa/* /root/easy-rsa/ >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Creando directorios de trabajo" 
+
+cd /root/easy-rsa/
+./easy-rsa init-pki >> $LOGFILE 2>$ERRFILE &
+
+echo -e "\\\"set_var EASYRSA_ALGO \\\"ec\\\"" > /root/easy-rsa/pki/vars
+echo -e "\\\"set_var EASYRSA_DIGEST \\\"sha512\\\"" >> /root/easy-rsa/pki/vars
 
 
-#apt install -y curl openvpn easyrsa >> $LOGFILE 2>$ERRFILE &
-#dot_check $! "Instalando recursos"
 
-
-#mkdir -p /root/client-configs/keys >> $LOGFILE 2>$ERRFILE &
-#mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
-#dot_check $! "Creando directorios de trabajo" 
-
-
+####################################################################################
+################################CA REMOTE SCRIPT####################################
+####################################################################################
 #ca_script="#!/bin/bash
 #apt install -y easyrsa
 #mkdir -p /root/easy-rsa
 #cd /root/easy-rsa
 #./easyrsa init-pki
-
 #echo -e \"set_var EASYRSA_REQ_COUNTRY    \\\"ES\\\"\" >> /root/easy-rsa/pki/vars
 #echo -e \"set_var EASYRSA_REQ_PROVINCE   \\\"Barcelona\\\"\" >> /root/easy-rsa/pki/vars
 #echo -e \"set_var EASYRSA_REQ_CITY       \\\"Castelldefels\\\"\" >> /root/easy-rsa/pki/vars
@@ -158,14 +166,13 @@ screen
 #echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt root@$vpn_ip:/etc/openvpn/server/\"
 #echo -e \"Una vez el ca.crt este en tu VPN COPIALO a \\\"/root/client-configs/keys\\\"\"
 #"
-ca_script="#!/bin/bash
-echo hola"
-
-echo "$ca_script" > "ca.sh"
-chmod +x ca.sh
-echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
-nc -lp 9000 -k -e ./ca.sh >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Ejecutando script remoto" 
+#
+#
+#echo "$ca_script" > "ca.sh"
+#chmod +x ca.sh
+#echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
+#nc -lp 9000 -k -e ./ca.sh >> $LOGFILE 2>$ERRFILE &
+#dot_check $! "Ejecutando script remoto" 
 
 
 
