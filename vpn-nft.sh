@@ -138,8 +138,9 @@ mkdir -p /root/easy-rsa
 ln -s /usr/share/easy-rsa/* /root/easy-rsa/ >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Creando directorios de trabajo" 
 
-cd /root/easy-rsa/
-./easyrsa init-pki >> $LOGFILE 2>$ERRFILE &
+./root/easy-rsa/easyrsa init-pki >> $LOGFILE 2>$ERRFILE &
+cp /root/pki/ /root/easy-rsa/
+rm -r /root/pki
 echo -e "\\\"set_var EASYRSA_ALGO \\\"ec\\\"" >> /root/easy-rsa/pki/vars
 echo -e "\\\"set_var EASYRSA_DIGEST \\\"sha512\\\"" >> /root/easy-rsa/pki/vars
 sleep 0.2 >> $LOGFILE 2>$ERRFILE &
