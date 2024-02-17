@@ -147,6 +147,13 @@ dot_check $! "Configurando easy-rsa"
 
 
 
+cd /home/alumnat
+sleep 1
+cd /root/easy-rsa/
+echo -e "\\\"set_var EASYRSA_ALGO \\\"ec\\\"" > pki/vars
+echo -e "\\\"set_var EASYRSA_DIGEST \\\"sha512\\\"" >> pki/vars
+
+
 ####################################################################################
 ################################CA REMOTE SCRIPT####################################
 ####################################################################################
