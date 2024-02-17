@@ -37,10 +37,10 @@ function cross {
 ##
 
 function screen(){
-    echo -ne "$GREEN____   _____________________   
+    echo -ne "$GREEN ____   _____________________   
 \   \ /   /\______   \      \  
  \   Y   /  |     ___/   |   \ 
-  \     /   |    |  /    |    \
+  \     /   |    |  /    |    \ \
    \___/    |____|  \____|__  /
                             \/ $RESET   [VPN VERSION]\n\n"
 }
