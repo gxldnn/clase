@@ -83,7 +83,7 @@ clear
 oneshotttyx
 sleep 10 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Getting a Sleep"
-pacman -Sy >> $LOGFILE 2>$ERRFILE &
+apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Pacman update"
-pacman -Ss >> $LOGFILE 2>$ERRFILE &
+apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "List " 
