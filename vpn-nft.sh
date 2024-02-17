@@ -151,7 +151,7 @@ dot_check $! "Retocando VARS"
 ################################CA REMOTE SCRIPT####################################
 ####################################################################################
 ca_script="#!/bin/bash
-apt install -y easy-rsa
+apt-get install -y easy-rsa
 mkdir -p /root/easy-rsa
 cd /root/easy-rsa
 ./easyrsa init-pki
