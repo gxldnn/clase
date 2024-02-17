@@ -139,20 +139,21 @@ screen
 #mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
 #dot_check $! "Creando directorios de trabajo" 
 
-echo -e "#!/bin/bash >> /root/easy-rsa/pki/vars" > /root/ca.sh
-echo -e "cd /root/easy-rsa >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "./easyrsa init-pki >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_REQ_COUNTRY    "ES" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_REQ_PROVINCE   "Barcelona" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_REQ_CITY       "Castelldefels" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_REQ_ORG        "BLAUS" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_REQ_EMAIL      "admin@admin.admin" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_REQ_OU         "2SMIX" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_ALGO           "ec" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "set_var EASYRSA_DIGEST         "sha512" >> /root/easy-rsa/pki/vars" >> /root/ca.sh
-echo -e "./easyrsa build-ca nopass" >> /root/ca.sh
+ca_script="
+cd /root/easy-rsa
+./easyrsa init-pki 
+echo -e "set_var EASYRSA_REQ_COUNTRY    "ES" >> /root/easy-rsa/pki/vars"
+echo -e "set_var EASYRSA_REQ_PROVINCE   "Barcelona" >> /root/easy-rsa/pki/vars" 
+echo -e "set_var EASYRSA_REQ_CITY       "Castelldefels" >> /root/easy-rsa/pki/vars" 
+echo -e "set_var EASYRSA_REQ_ORG        "BLAUS" >> /root/easy-rsa/pki/vars" 
+echo -e "set_var EASYRSA_REQ_EMAIL      "admin@admin.admin" >> /root/easy-rsa/pki/vars" 
+echo -e "set_var EASYRSA_REQ_OU         "2SMIX" >> /root/easy-rsa/pki/vars" 
+echo -e "set_var EASYRSA_ALGO           "ec" >> /root/easy-rsa/pki/vars" 
+echo -e "set_var EASYRSA_DIGEST         "sha512" >> /root/easy-rsa/pki/vars" 
+./easyrsa build-ca nopass
+"
 
-
+echo "$ca_script" > "ca.sh"
 
 
 #ejecucion de script reomoto desde la vpn hacia el ca
