@@ -42,7 +42,7 @@ function screen(){
  \   Y   /  |     ___/   |   \ 
   \     /   |    |  /    |    \ 
    \___/    |____|  \____|__  /
-                            \/ $RESET   [VPN VERSION]\n\n"
+                            \/ $RESET   [$YELLOW gxldn $RESET]\n\n"
 }
 
 
