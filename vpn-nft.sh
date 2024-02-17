@@ -36,7 +36,7 @@ function cross {
 ##      MAIN FUNCTIONS
 ##
 
-function oneshotttya(){
+function screen(){
     echo -ne "$GREEN____   _____________________   
 \   \ /   /\______   \      \  
  \   Y   /  |     ___/   |   \ 
@@ -77,7 +77,7 @@ function direct_check {
 }
 
 clear
-oneshotttyx
+screen
 sleep 1 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Getting a Sleep"
 apt update >> $LOGFILE 2>$ERRFILE &
