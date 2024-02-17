@@ -140,14 +140,11 @@ dot_check $! "Creando directorios de trabajo"
 
 cd /root/easy-rsa/
 ./easyrsa init-pki >> $LOGFILE 2>$ERRFILE &
-sleep 0.5 >> $LOGFILE 2>$ERRFILE &
-cd /root
-cd /root/easy-rsa/
-sleep 0.5 >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Configurando easy-rsa"
 echo -e \"set_var EASYRSA_ALGO "ec"\" > pki/vars
 echo -e \"set_var EASYRSA_DIGEST "sha512"\" >> pki/vars
-dot_check $! "Configurando easy-rsa"
-
+sleep 0.5 >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Retocando VARS"
 
 
 ####################################################################################
