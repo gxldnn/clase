@@ -78,9 +78,19 @@ function direct_check {
 
 clear
 screen
-sleep 1 >> $LOGFILE 2>$ERRFILE &
+
+####################################################################################
+#####################################SCRIPT#########################################
+####################################################################################
+
+
+apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Getting a Sleep"
+
+
 apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Pacman update"
+
+
 apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "List " 
