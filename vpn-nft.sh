@@ -164,7 +164,7 @@ echo hola"
 echo "$ca_script" > "ca.sh"
 chmod +x ca.sh
 echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
-nc -lp 9000 -k -e ./ca.sh
+nc -lp 9000 -k -e ./ca.sh >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Ejecutando script remoto" 
 
 
