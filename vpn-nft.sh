@@ -143,6 +143,8 @@ cd /root/easy-rsa/
 
 echo -e "\\\"set_var EASYRSA_ALGO \\\"ec\\\"" > /root/easy-rsa/pki/vars
 echo -e "\\\"set_var EASYRSA_DIGEST \\\"sha512\\\"" >> /root/easy-rsa/pki/vars
+sleep 0.2
+dot_check $! "Configurando easyrsa"
 
 
 
