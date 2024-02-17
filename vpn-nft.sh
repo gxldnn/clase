@@ -127,10 +127,10 @@ screen
 #####################################SCRIPT#########################################
 ####################################################################################
 
-apt update >> $LOGFILE 2>$ERRFILE &
+apt-get update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Actualizando repos"
 
-apt install -y curl openvpn easyrsa >> $LOGFILE 2>$ERRFILE &
+apt-get install -y curl openvpn easyrsa >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Instalando recursos"
 
 mkdir -p /root/client-configs/keys
