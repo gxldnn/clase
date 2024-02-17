@@ -118,7 +118,7 @@ echo -e "IP de el servidor CA:"       $GREEN $ca_ip$RESET
 read -s -n 1 -r -p "Presione [Enter] si es correcta, en el caso contrario presione [X]" check
 
 if [[ $check == "x" ]]; then
-    echo -e "\n Operation cancelled."
+    echo -e "\nOperation cancelled."
     exit 1
 else
     echo -n ""
