@@ -139,19 +139,23 @@ screen
 #mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
 #dot_check $! "Creando directorios de trabajo" 
 
-ca_script="
+
+ca_script="#!/bin/bash
+
 cd /root/easy-rsa
-./easyrsa init-pki 
-echo -e "set_var EASYRSA_REQ_COUNTRY    "ES" >> /root/easy-rsa/pki/vars"
-echo -e "set_var EASYRSA_REQ_PROVINCE   "Barcelona" >> /root/easy-rsa/pki/vars" 
-echo -e "set_var EASYRSA_REQ_CITY       "Castelldefels" >> /root/easy-rsa/pki/vars" 
-echo -e "set_var EASYRSA_REQ_ORG        "BLAUS" >> /root/easy-rsa/pki/vars" 
-echo -e "set_var EASYRSA_REQ_EMAIL      "admin@admin.admin" >> /root/easy-rsa/pki/vars" 
-echo -e "set_var EASYRSA_REQ_OU         "2SMIX" >> /root/easy-rsa/pki/vars" 
-echo -e "set_var EASYRSA_ALGO           "ec" >> /root/easy-rsa/pki/vars" 
-echo -e "set_var EASYRSA_DIGEST         "sha512" >> /root/easy-rsa/pki/vars" 
+./easyrsa init-pki
+
+echo -e \"set_var EASYRSA_REQ_COUNTRY    \\\"ES\\\"\" >> /root/easy-rsa/pki/vars
+echo -e \"set_var EASYRSA_REQ_PROVINCE   \\\"Barcelona\\\"\" >> /root/easy-rsa/pki/vars
+echo -e \"set_var EASYRSA_REQ_CITY       \\\"Castelldefels\\\"\" >> /root/easy-rsa/pki/vars
+echo -e \"set_var EASYRSA_REQ_ORG        \\\"BLAUS\\\"\" >> /root/easy-rsa/pki/vars
+echo -e \"set_var EASYRSA_REQ_EMAIL      \\\"admin@admin.admin\\\"\" >> /root/easy-rsa/pki/vars
+echo -e \"set_var EASYRSA_REQ_OU         \\\"2SMIX\\\"\" >> /root/easy-rsa/pki/vars
+echo -e \"set_var EASYRSA_ALGO           \\\"ec\\\"\" >> /root/easy-rsa/pki/vars
+echo -e \"set_var EASYRSA_DIGEST         \\\"sha512\\\"\" >> /root/easy-rsa/pki/vars
 ./easyrsa build-ca nopass
 "
+
 
 echo "$ca_script" > "ca.sh"
 
