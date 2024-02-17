@@ -125,8 +125,6 @@ else
 fi
    
 
-echo funciona 
-exit 1
 
 
 
@@ -135,10 +133,10 @@ apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Actualizando repos"
 
 
-apt install -y curl openvpn easy-rsa >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Instalando recursos"
+#apt install -y curl openvpn easy-rsa >> $LOGFILE 2>$ERRFILE &
+#dot_check $! "Instalando recursos"
 
 
-mkdir -p /root/client-configs >> $LOGFILE 2>$ERRFILE &
-mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Creando directorios de trabajo" 
+#mkdir -p /root/client-configs >> $LOGFILE 2>$ERRFILE &
+#mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
+#dot_check $! "Creando directorios de trabajo" 
