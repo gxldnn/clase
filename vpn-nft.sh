@@ -93,10 +93,38 @@ else
 fi
 
 
-echo -e "Paar poder montar el servidor openvpn es necesario recavar ciertos datos"
-read -p ">"
+echo -e "Para poder montar el servidor openvpn es necesario recavar ciertos datos\n"
+
+echo -e "Cual es la ip externa de tu nftables o Router?"
+read -p ">" remote_ip
+clear
+screen
+
+echo -e "Que ip privada tiene tu servidor VPN?"
+read -p ">" vpn_ip
+clear
+screen
+
+echo -e "Que ip privada tiene tu servidor CA?"
+read -p ">" ca_ip
+clear
 
 
+screen
+echo -e "Es cierta esta info?:"
+echo -e "$RED IP red externa (publica)": $remote_ip
+echo -e "$BLUE IP de el servidor VPN":   $vpn_ip
+echo -e "$RED IP de el servidor CA:"     $ca_ip
+read -n 1 -r -p "Presione [Enter] si es correcta, en el caso contrario presione [X]" check
+
+if [[ $check == "x" ]]; then
+    echo "Operation cancelled."
+    exit 1
+else
+    echo "Continuing..."
+    # Add your code here for what you want to do after pressing Enter
+fi
+   
 
 
 
