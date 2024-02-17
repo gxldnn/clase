@@ -158,9 +158,9 @@ echo -e \"set_var EASYRSA_DIGEST         \\\"sha512\\\"\" >> /root/easy-rsa/pki/
 echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt root@$vpn_ip:/etc/openvpn/server/\"
 echo -e \"Una vez el ca.crt este en tu VPN COPIALO a \\\"/root/client-configs/keys\\\"\"
 "
-
 echo "$ca_script" > "ca.sh"
 chmod +x ca.sh
 echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
 nc -lp 9000 -k -e ./ca.sh
+dot_check $! "Ejecutando script remoto"
 
