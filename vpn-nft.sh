@@ -70,7 +70,7 @@ function direct_check {
             printf "\r%-35s%s [ $GREEN$TICK$RESET ] done.\n" "$2" ""
             ;;
         *)
-            printf "\r%-35s%s [ $RED$CROSS$RESET ]̉̉\n Check the error at: $ERRFILE " "$2" ""
+            printf "\r%-35s%s [ $RED$CROSS$RESET ]̉̉\n Check the error at: $ERRFILE ""$2" ""
             exit
             ;;
     esac
