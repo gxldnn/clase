@@ -42,7 +42,7 @@ function screen(){
  \   Y   /  |     ___/   |   \ 
   \     /   |    |  /    |    \ 
    \___/    |____|  \____|__  /
-                            \/ $RESET   [$YELLOW gxldn $RESET]\n\n"
+                            \/ $RESET     $MAGENTA[$YELLOW gxldn $MAGENTA]$RESET\n\n"
 }
 
 
