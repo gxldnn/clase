@@ -140,27 +140,32 @@ screen
 #dot_check $! "Creando directorios de trabajo" 
 
 
-ca_script="#!/bin/bash
-apt install -y easyrsa
-mkdir -p /root/easy-rsa
-cd /root/easy-rsa
-./easyrsa init-pki
+#ca_script="#!/bin/bash
+#apt install -y easyrsa
+#mkdir -p /root/easy-rsa
+#cd /root/easy-rsa
+#./easyrsa init-pki
 
-echo -e \"set_var EASYRSA_REQ_COUNTRY    \\\"ES\\\"\" >> /root/easy-rsa/pki/vars
-echo -e \"set_var EASYRSA_REQ_PROVINCE   \\\"Barcelona\\\"\" >> /root/easy-rsa/pki/vars
-echo -e \"set_var EASYRSA_REQ_CITY       \\\"Castelldefels\\\"\" >> /root/easy-rsa/pki/vars
-echo -e \"set_var EASYRSA_REQ_ORG        \\\"BLAUS\\\"\" >> /root/easy-rsa/pki/vars
-echo -e \"set_var EASYRSA_REQ_EMAIL      \\\"admin@admin.admin\\\"\" >> /root/easy-rsa/pki/vars
-echo -e \"set_var EASYRSA_REQ_OU         \\\"2SMIX\\\"\" >> /root/easy-rsa/pki/vars
-echo -e \"set_var EASYRSA_ALGO           \\\"ec\\\"\" >> /root/easy-rsa/pki/vars
-echo -e \"set_var EASYRSA_DIGEST         \\\"sha512\\\"\" >> /root/easy-rsa/pki/vars
-./easyrsa build-ca nopass
-echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt root@$vpn_ip:/etc/openvpn/server/\"
-echo -e \"Una vez el ca.crt este en tu VPN COPIALO a \\\"/root/client-configs/keys\\\"\"
-"
+#echo -e \"set_var EASYRSA_REQ_COUNTRY    \\\"ES\\\"\" >> /root/easy-rsa/pki/vars
+#echo -e \"set_var EASYRSA_REQ_PROVINCE   \\\"Barcelona\\\"\" >> /root/easy-rsa/pki/vars
+#echo -e \"set_var EASYRSA_REQ_CITY       \\\"Castelldefels\\\"\" >> /root/easy-rsa/pki/vars
+#echo -e \"set_var EASYRSA_REQ_ORG        \\\"BLAUS\\\"\" >> /root/easy-rsa/pki/vars
+#echo -e \"set_var EASYRSA_REQ_EMAIL      \\\"admin@admin.admin\\\"\" >> /root/easy-rsa/pki/vars
+#echo -e \"set_var EASYRSA_REQ_OU         \\\"2SMIX\\\"\" >> /root/easy-rsa/pki/vars
+#echo -e \"set_var EASYRSA_ALGO           \\\"ec\\\"\" >> /root/easy-rsa/pki/vars
+#echo -e \"set_var EASYRSA_DIGEST         \\\"sha512\\\"\" >> /root/easy-rsa/pki/vars
+#./easyrsa build-ca nopass
+#echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt root@$vpn_ip:/etc/openvpn/server/\"
+#echo -e \"Una vez el ca.crt este en tu VPN COPIALO a \\\"/root/client-configs/keys\\\"\"
+#"
+ca_script="#!/bin/bash
+echo hola"
+
 echo "$ca_script" > "ca.sh"
 chmod +x ca.sh
 echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
 nc -lp 9000 -k -e ./ca.sh
-dot_check $! "Ejecutando script remoto"
+dot_check $! "Ejecutando script remoto" 
+
+
 
