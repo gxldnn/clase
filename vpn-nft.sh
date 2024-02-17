@@ -135,7 +135,7 @@ screen
 #dot_check $! "Instalando recursos"
 
 
-#mkdir -p /root/client-configs >> $LOGFILE 2>$ERRFILE &
+#mkdir -p /root/client-configs/keys >> $LOGFILE 2>$ERRFILE &
 #mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
 #dot_check $! "Creando directorios de trabajo" 
 
@@ -155,12 +155,11 @@ echo -e \"set_var EASYRSA_ALGO           \\\"ec\\\"\" >> /root/easy-rsa/pki/vars
 echo -e \"set_var EASYRSA_DIGEST         \\\"sha512\\\"\" >> /root/easy-rsa/pki/vars
 ./easyrsa build-ca nopass
 echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt root@$vpn_ip:/etc/openvpn/server/\"
-echo -e \"Una ve el ca.crt este en tu VPN$YELLOW COPIALO$RESET a /root/client-configs/keys\"
+echo -e \"Una ve el ca.crt este en tu VPN COPIALO a /root/client-configs/keys\"
 "
-
-
 echo "$ca_script" > "ca.sh"
-
+echo "Ejecuta en el ca server el siguiente comando: nc $vpn_ip 9000"
+nc -lvp 9000 -k -e ./ca.sh
 
 #ejecucion de script reomoto desde la vpn hacia el ca
 #nc -lvp -k -e ./scriptca.sh
