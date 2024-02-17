@@ -126,7 +126,8 @@ else
 fi
    
 
-
+echo funciona 
+exit 1
 
 
 
@@ -142,5 +143,3 @@ dot_check $! "Instalando recursos"
 mkdir -p /root/client-configs >> $LOGFILE 2>$ERRFILE &
 mkdir -p /root/easyrsa >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Creando directorios de trabajo" 
-
-./easyrsa
