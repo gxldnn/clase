@@ -81,7 +81,7 @@ function direct_check {
 
 clear
 oneshotttyx
-sleep 10 >> $LOGFILE 2>$ERRFILE &
+sleep 1 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Getting a Sleep"
 apt update >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Pacman update"
