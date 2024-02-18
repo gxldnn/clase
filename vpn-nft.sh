@@ -155,3 +155,4 @@ echo -e "set_var EASYRSA_ALGO           \\\"ec\\\"" >> pki/vars
 echo -e "set_var EASYRSA_DIGEST         \\\"sha512\\\"" >> pki/vars
 sleep 0.5 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Retocando VARS CA"
+
