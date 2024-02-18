@@ -138,41 +138,33 @@ mkdir -p /root/easy-rsa
 ln -s /usr/share/easy-rsa/* /root/easy-rsa/ >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Creando directorios de trabajo" 
 
+
+
+
+
 cd /root/easy-rsa/
+./easyrsa init-pki >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Configurando easy-rsa CA"
+echo -e "set_var EASYRSA_REQ_COUNTRY    \\\"ES\\\"" > pki/vars
+echo -e "set_var EASYRSA_REQ_PROVINCE   \\\"Barcelona\\\"" >> pki/vars
+echo -e "set_var EASYRSA_REQ_CITY       \\\"Castelldefels\\\"" >> pki/vars
+echo -e "set_var EASYRSA_REQ_ORG        \\\"BLAUS\\\"" >> pki/vars
+echo -e "set_var EASYRSA_REQ_EMAIL      \\\"admin@admin.admin\\\"" >> pki/vars
+echo -e "set_var EASYRSA_REQ_OU         \\\"2SMIX\\\"" >> pki/vars
+echo -e "set_var EASYRSA_ALGO           \\\"ec\\\"" >> pki/vars
+echo -e "set_var EASYRSA_DIGEST         \\\"sha512\\\"" >> pki/vars
+sleep 0.5 >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Retocando VARS CA"
+
+
+
+cd /root/easy-rsa/
+rm -r pki/
 ./easyrsa init-pki >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Configurando easy-rsa"
 echo -e "set_var EASYRSA_ALGO \"ec\"" > pki/vars
 echo -e "set_var EASYRSA_DIGEST \"sha512\"" >> pki/vars
 sleep 0.5 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Retocando VARS"
-
-
-####################################################################################
-################################CA REMOTE SCRIPT####################################
-####################################################################################
-ca_script="#!/bin/bash
-apt-get install -y easy-rsa
-mkdir -p /root/easy-rsa
-ln -s /usr/share/easy-rsa/* /root/easy-rsa/
-#./easyrsa init-pki
-#echo -e \"set_var EASYRSA_REQ_COUNTRY    \\\"ES\\\"\" >> /root/easy-rsa/pki/vars
-#echo -e \"set_var EASYRSA_REQ_PROVINCE   \\\"Barcelona\\\"\" >> /root/easy-rsa/pki/vars
-#echo -e \"set_var EASYRSA_REQ_CITY       \\\"Castelldefels\\\"\" >> /root/easy-rsa/pki/vars
-#echo -e \"set_var EASYRSA_REQ_ORG        \\\"BLAUS\\\"\" >> /root/easy-rsa/pki/vars
-#echo -e \"set_var EASYRSA_REQ_EMAIL      \\\"admin@admin.admin\\\"\" >> /root/easy-rsa/pki/vars
-#echo -e \"set_var EASYRSA_REQ_OU         \\\"2SMIX\\\"\" >> /root/easy-rsa/pki/vars
-#echo -e \"set_var EASYRSA_ALGO           \\\"ec\\\"\" >> /root/easy-rsa/pki/vars
-#echo -e \"set_var EASYRSA_DIGEST         \\\"sha512\\\"\" >> /root/easy-rsa/pki/vars
-#./easyrsa build-ca nopass
-#echo -e \"Ahora ejecuta el siguiente comando:\n scp /root/easy-rsa/pki/ca.crt root@$vpn_ip:/etc/openvpn/server/\"
-#echo -e \"Una vez el ca.crt este en tu VPN COPIALO a \\\"/root/client-configs/keys\\\"\"
-"
-
-
-echo "$ca_script" > /root/ca.sh
-chmod +x /root/ca.sh
-cd 
-nc -lp 9000 -k  < /root/ca.sh >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Haz:[ nc$vpn_ip 9000 ] en el CA server" 
 
 
