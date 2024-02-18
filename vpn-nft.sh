@@ -155,16 +155,3 @@ echo -e "set_var EASYRSA_ALGO           \\\"ec\\\"" >> pki/vars
 echo -e "set_var EASYRSA_DIGEST         \\\"sha512\\\"" >> pki/vars
 sleep 0.5 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Retocando VARS CA"
-
-
-
-cd /root/easy-rsa/
-rm -r pki/
-./easyrsa init-pki >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Configurando easy-rsa"
-echo -e "set_var EASYRSA_ALGO \"ec\"" > pki/vars
-echo -e "set_var EASYRSA_DIGEST \"sha512\"" >> pki/vars
-sleep 0.5 >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Retocando VARS"
-
-
