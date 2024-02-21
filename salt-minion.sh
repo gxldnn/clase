@@ -90,7 +90,7 @@ fi
 
 clear
 screen
-ping -c 1 -t 1 google.com
+ping -c 1 -t 2 google.com
 test-ping $?
 
 echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
@@ -113,12 +113,3 @@ echo -e "master: $master_ip" > /etc/salt/minion
 echo -e "id: $minion_id" > /etc/salt/minion
 systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Reconfigurando Minion"
-
-
-
-
-
-
-
-
-
