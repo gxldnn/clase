@@ -48,7 +48,7 @@ function screen () {
 
 function dot_check {
     echo -n $2
-    dots=0git 
+    dots=0
 
     while kill -0 $1 2>/dev/null; do
         if [ $dots -ge 4 ]; then
@@ -59,7 +59,6 @@ function dot_check {
         ((dots++))
         sleep 0.5
     done
-s
     wait $1
     direct_check $? "$2"
 }
