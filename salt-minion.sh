@@ -101,9 +101,9 @@ read -p ">" minion_id
 apt update >> $LOGFILE
 apt install curl -y >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Instalando Curl"
-curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/11/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
 dot_check $! "Descargando Repositorios"
-echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/11/amd64/latest bullseye main" > /etc/apt/sources.list.d/salt.list
+echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" > /etc/apt/sources.list.d/salt.list
 sleep 1 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Añadiendo Repositorios"
 
