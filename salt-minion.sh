@@ -90,7 +90,8 @@ fi
 
 clear
 screen
-test-ping
+ping -c 1 -t 1j google.com
+test-ping $?
 
 echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
 read -p ">" master_ip
