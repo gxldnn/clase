@@ -1,5 +1,4 @@
 #!/bin/bash
-# Script bien bellako made by goldn n moska
 
 ##################################
 ##
