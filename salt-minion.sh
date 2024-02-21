@@ -90,7 +90,7 @@ fi
 
 clear
 screen
-ping -c 1 -W 5 google.com
+ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
 test-ping $?
 
 echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
