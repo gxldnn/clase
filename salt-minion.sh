@@ -83,7 +83,7 @@ function test-ping() {
         echo -e "$STDCOLOR -------------------------------- $RESET"
         exit
     else
-        echo -e "$STDCOLOR''Conexion: \t$GREEN     OK $RESET"
+        echo -e "$STDCOLOR Conexion: \t$GREEN     OK $RESET"
 fi
 }
 
