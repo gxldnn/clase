@@ -21,6 +21,8 @@ CYAN="\e[36m"
 GREY="\e[37m"
 RESET="\e[0m"
 
+STDCOLOR="\e[96m"
+ERRCOLOR="\e[91m"
 
 TICK="\xE2\x9C\x93"
 CROSS="\xE2\x9C\x98"
@@ -36,12 +38,12 @@ function cross {
 ##
 
 function screen () {
-    echo '  _________      .__   __               _____  .__       .__               
+    echo -e ''$YELLOW'  _________      .__   __               _____  .__       .__               
  /   _____/____  |  |_/  |_            /     \ |__| ____ |__| ____   ____  
  \_____  \\__  \ |  |\   __\  ______  /  \ /  \|  |/    \|  |/  _ \ /    \ 
  /        \/ __ \|  |_|  |   /_____/ /    Y    \  |   |  \  (  <_> )   |  \
 /_______  (____  /____/__|           \____|__  /__|___|  /__|\____/|___|  /
-        \/     \/                            \/        \/               \/ '
+        \/     \/                            \/        \/               \/ '$RESET'      '
 }
 
 function dot_check {
@@ -74,5 +76,48 @@ function direct_check {
     esac
 }
 
+function test-ping() {
+	if [ $1 -ne 0 ]; then
+        echo -e "$STDCOLOR  Conexion: \t$RED     Error $RESET"
+        echo -e "\n"
+        echo -e "$STDCOLOR -------------------------------- $RESET"
+        exit
+    else
+        echo -e "$STDCOLOR  Conexion: \t$GREEN     OK $RESET"
+fi
+}
+
+
 clear
 screen
+test-ping
+
+echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
+read -p ">" master_ip
+echo -e "[$YELLOW!$RESET] Nombre del Minion"
+read -p ">" minion_id
+
+curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Descargando Repositorios"
+echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" > /etc/apt/sources.list.d/salt.list
+sleep 1 >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Añadiendo Repositorios"
+
+apt update >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Actualizando Repositorios"
+apt install salt-minion -y >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Instalando Salt-Minion"
+
+echo -e "master: $master_ip" > /etc/salt/minion
+echo -e "id: $minion_id" > /etc/salt/minion
+systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Reconfigurando Minion"
+
+
+
+
+
+
+
+
+
