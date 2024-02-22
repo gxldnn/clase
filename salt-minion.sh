@@ -5,9 +5,9 @@
 ##      COLORS && MoRE
 ##
 
-LOGFILE=$(pwd)/oneshotlog/logfile.log
-ERRFILE=$(pwd)/oneshotlog/errfile.err
-mkdir -p $(pwd)/oneshotlog
+LOGFILE=$(pwd)/SALTSTACK/logfile.log
+ERRFILE=$(pwd)/SALTSTACK/errfile.err
+mkdir -p $(pwd)/SALTSTACK
 touch $LOGFILE
 touch $ERRFILE
 
@@ -43,6 +43,19 @@ function screen () {
  /         / __ \|  |_|  |   /_____/ /    Y    \  |   |  \  (  <_> )   |  \
 /_______  (____  /____/__|           \____|__  /__|___|  /__|\____/|___|  /
         \/     \/                            \/        \/               \/ '$RESET'      '
+}
+function finish_message {
+        clear
+    echo -e "                  ______      __  __     __        _____      __   __     __   __   
+     /_/\___\   /\  /\  /\  /\_\      /\ __/\    /_/\ /\_\   /_/\ /\_\  
+     ) ) ___/   \ \ \/ / / ( ( (      ) )  \ \   ) ) \ ( (   ) ) \ ( (  
+        /_/ /  ___   \ \  / /   \ \_\    / / /\ \ \ /_/   \ \_\ /_/   \ \_\ 
+    \ \ \_/\__\  / /  \ \   / / /__  \ \ \/ / / \ \ \   / / \ \ \   / / 
+     )_)  \/ _/ / / /\ \ \ ( (_____(  ) )__/ /   )_) \ (_(   )_) \ (_(  
+         \_\____/   \/__\/__\/  \/_____/  \/___\/    \_\/ \/_/   \_\/ \/_/"
+    echo
+    echo -e "      $GREEN Instalación de Salt-Minion completada exitosamente.${RESET}"
+    echo "       Puedes comenzar a usar Salt para gestionar tus sistemas."
 }
 
 function dot_check {
@@ -85,8 +98,24 @@ function test-ping() {
         echo -e "$STDCOLOR Conexion: \t$GREEN     OK $RESET"
 fi
 }
-
-
+function kill_dpkg_lock {
+    local lockfile="/var/lib/dpkg/lock"
+    if fuser $lockfile >/dev/null 2>&1; then
+        echo "Se encontró un proceso que bloquea dpkg. Matando el proceso..."
+        local pid=$(sudo lsof -t $lockfile)
+        kill $pid
+        sleep 2
+    fi
+    }
+    function kill_dpkg_lock-frontend {
+    local lockfile="/var/lib/dpkg/lock-frontend"
+    if fuser $lockfile >/dev/null 2>&1; then
+        echo "Se encontró un proceso que bloquea dpkg. Matando el proceso..."
+        local pid=$(sudo lsof -t $lockfile)
+        kill $pid
+        sleep 2
+    fi
+    }
 
 ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
 test-ping $?
@@ -144,6 +173,8 @@ case $CHOICE in
             dot_check $! "Descargando Repositorios"
             apt update >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Actualizando Repositorios"
+            kill_dpkg_lock
+            kill_dpkg_lock-frontend
             apt install salt-minion -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Instalando Salt-Minion"
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
@@ -152,19 +183,6 @@ case $CHOICE in
             echo -e "id: $minion_id" >> /etc/salt/minion
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Finalizando Instalacion"
-            function finish_message {
-                clear
-                echo -e "                  ______      __  __     __        _____      __   __     __   __   
-                 /_/\___\   /\  /\  /\  /\_\      /\ __/\    /_/\ /\_\   /_/\ /\_\  
-                 ) ) ___/   \ \ \/ / / ( ( (      ) )  \ \   ) ) \ ( (   ) ) \ ( (  
-                /_/ /  ___   \ \  / /   \ \_\    / / /\ \ \ /_/   \ \_\ /_/   \ \_\ 
-                \ \ \_/\__\  / /  \ \   / / /__  \ \ \/ / / \ \ \   / / \ \ \   / / 
-                 )_)  \/ _/ / / /\ \ \ ( (_____(  ) )__/ /   )_) \ (_(   )_) \ (_(  
-                 \_\____/   \/__\/__\/  \/_____/  \/___\/    \_\/ \/_/   \_\/ \/_/"
-                echo
-                echo -e "      $GREEN Instalación de Salt-Minion completada exitosamente.${RESET}"
-                echo "       Puedes comenzar a usar Salt para gestionar tus sistemas."
-            }
             finish_message
             ;;
 esac
