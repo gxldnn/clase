@@ -96,6 +96,7 @@ function first_install () {
     if [[ install_status == "1" ]]; then
         echo -n ""
     else
+        clear
         screen
         apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
         dot_check $! "Borrando Salt"
@@ -105,7 +106,8 @@ function first_install () {
                 rm -r /var/log/salt
                 rm -r /var/cache/salt
             }
-        cleanup >> $LOGFILE 2>$ERRFILE &
+        cleanup > /dev/null 2>&1
+        sleep 0.1 >> $LOGFILE 2>$ERRFILE &
         dot_check $! "Limpiando salt-orphans"
         sleep 2
         dot_check $! "Entrando al installer"
