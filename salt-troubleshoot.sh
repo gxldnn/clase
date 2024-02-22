@@ -211,7 +211,7 @@ case $CHOICE in
             finish_message
             ;;
         3)
-            tyoe="Minion Service"
+            type="Minion Service"
             dpkg -s salt-master
             pkg-installed $!
             clear
