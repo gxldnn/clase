@@ -131,8 +131,8 @@ MENU="Escoge una de las opciones"
 
 OPTIONS=(1 "Instalar Salt Master"
          2 "master is running? error message"
-         2 "Instalar Salt Minion"
-         3 "Minion [No Response] ERROR")
+         3 "Instalar Salt Minion"
+         4 "Minion [No Response] ERROR")
 
 CHOICE=$(dialog --clear \
                 --backtitle "$TITULODEVENTANA" \
