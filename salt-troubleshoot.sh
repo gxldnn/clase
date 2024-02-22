@@ -267,7 +267,7 @@ case $CHOICE in
             pkg-installed $?
             clear
             screen_message
-            rm -r /etc/salt/pki/minion/minion_master.pub
+            rm -r /etc/salt/pki/minion/minion_master.pub >> $LOGFILE 2>$ERRFILE
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Reestableciendo la conexion m-m"
             finish_message
