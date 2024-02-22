@@ -151,7 +151,8 @@ case $CHOICE in
             echo -e "master: $master_ip" > /etc/salt/minion
             echo -e "id: $minion_id" >> /etc/salt/minion
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
-            dot_check $! "Finalizando Instalación"
+            dot_check $! "Finalizando Instalacion"
+            echo 
 
             ;;
 esac
