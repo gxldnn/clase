@@ -154,17 +154,17 @@ case $CHOICE in
             dot_check $! "Finalizando Instalacion"
             function finish_message {
                 clear
-                echo -e "  /$$$$$$  /$$   /$$ /$$       /$$$$$$$  /$$   /$$ /$$   /$$"
-                echo -e " /$$__  $$| $$  / $$| $$      | $$__  $$| $$$ | $$| $$$ | $$"
-                echo -e "| $$  \__/|  $$/ $$/| $$      | $$  \ $$| $$$$| $$| $$$$| $$"
-                echo -e "| $$ /$$$$ \  $$$$/ | $$      | $$  | $$| $$ $$ $$| $$ $$ $$"
-                echo -e "| $$|_  $$  >$$  $$ | $$      | $$  | $$| $$  $$$$| $$  $$$$"
-                echo -e "| $$  \ $$ /$$/\  $$| $$      | $$  | $$| $$\  $$$| $$\  $$\$"
-                echo -e "|  $$$$$$/| $$  \ $$| $$$$$$$$| $$$$$$\$/| $$ \  $$| $$ \  $$"
-                echo -e " \______/ |__/  |__/|________/|_______/ |__/  \__/|__/  \__/"
-                echo -e "                                                             "
-                echo -e "      ${GREEN}Instalación de Salt-Minion completada exitosamente.${RESET}"
-                echo -e "      Puedes comenzar a usar Salt para gestionar tus sistemas."
+                echo "  /$$$$$$  /$$   /$$ /$$       /$$$$$$$  /$$   /$$ /$$   /$$"
+                echo " /$$__  $$| $$  / $$| $$      | $$__  $$| $$$ | $$| $$$ | $$"
+                echo "| $$  \__/|  $$/ $$/| $$      | $$  \ $$| $$$$| $$| $$$$| $$"
+                echo "| $$ /$$$$ \  $$$$/ | $$      | $$  | $$| $$ $$ $$| $$ $$ $$"
+                echo "| $$|_  $$  >$$  $$ | $$      | $$  | $$| $$  $$$$| $$  $$$$"
+                echo "| $$  \ $$ /$$/\  $$| $$      | $$  | $$| $$\  $$$| $$\  $$\$"
+                echo "|  $$$$$$/| $$  \ $$| $$$$$$$$| $$$$$$\$/| $$ \  $$| $$ \  $$"
+                echo " \______/ |__/  |__/|________/|_______/ |__/  \__/|__/  \__/"
+                echo "                                                             "
+                echo "      ${GREEN}Instalación de Salt-Minion completada exitosamente.${RESET}"
+                echo "      Puedes comenzar a usar Salt para gestionar tus sistemas."
             }
             finish_message
             ;;
