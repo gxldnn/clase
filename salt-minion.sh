@@ -69,6 +69,7 @@ function direct_check {
             ;;
         *)
             printf "\r%-35s%s [ $RED$CROSS$RESET ]̉̉\n Check the error at: $ERRFILE " "$2" ""
+            echo -e "\n"
             exit
             ;;
     esac
@@ -87,6 +88,7 @@ fi
 
 
 clear
+screen
 echo -e "[ 1 ] Primera Instalacion de salt"
 echo -e "[ 2 ] Instalacion Limpia de Salt (usar en caso de segunda o tercera instalación)"
 read -p ">" install_status
