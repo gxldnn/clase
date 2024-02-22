@@ -90,7 +90,6 @@ fi
 
 ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
 test-ping $?
-dpkg --configure -a
 clear
 apt install dialog -y >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Iniciando script"
