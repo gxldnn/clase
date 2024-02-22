@@ -149,6 +149,7 @@ case $CHOICE in
             screen
             pkill dpkg
             dpkg --configure -a
+            pkill dpkg
             apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Borrando Salt"
                 function cleanup() {
