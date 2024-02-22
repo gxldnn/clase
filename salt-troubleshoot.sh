@@ -212,8 +212,8 @@ case $CHOICE in
             ;;
         3)
             type="Minion Service"
-            dpkg -s salt-master
-            pkg-installed $!
+            dpkg -s salt-minion
+            pkg-installed $?
             clear
             screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
