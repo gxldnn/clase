@@ -152,9 +152,11 @@ CHOICE=$(dialog --clear \
 
 case $CHOICE in
         1)
+            clear
+            screen_message
             type="Master Service"
-            dpkg -s salt-master
-            pkg-installed $?
+            dpkg -s salt-master >> $LOGFILE 2>$ERRFILE
+            pkg-installed $? 
             clear
             screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
@@ -199,8 +201,10 @@ case $CHOICE in
             finish_message
             ;;
         2)
+            clear
+            screen_message
             type="Master Service"
-            dpkg -s salt-master
+            dpkg -s salt-master >> $LOGFILE 2>$ERRFILE
             pkg-installed $?
             clear
             screen_message
@@ -214,8 +218,10 @@ case $CHOICE in
             finish_message
             ;;
         3)
+            clear
+            screen_message
             type="Minion Service"
-            dpkg -s salt-minion
+            dpkg -s salt-minion >> $LOGFILE 2>$ERRFILE
             pkg-installed $?
             clear
             screen_message
@@ -264,8 +270,10 @@ case $CHOICE in
             finish_message
             ;;
         4)
+            clear
+            screen_message
             type="Minion Service"
-            dpkg -s salt-minion
+            dpkg -s salt-minion >> $LOGFILE 2>$ERRFILE
             pkg-installed $?
             clear
             screen_message
