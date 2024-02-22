@@ -128,6 +128,8 @@ case $CHOICE in
 
 
             apt update >> $LOGFILE
+            clear
+            screen
             apt install curl -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Instalando Curl"
             curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
@@ -177,6 +179,8 @@ case $CHOICE in
 
 
             apt update >> $LOGFILE
+            clear
+            screen
             apt install curl -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Instalando Curl"
             curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
