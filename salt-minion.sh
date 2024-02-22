@@ -105,8 +105,7 @@ CHOICE=$(dialog --clear \
                 $HEIGHT $WIDTH $CHOICE_HEIGHT \
                 "${OPTIONS[@]}" \
                 2>&1 >/dev/tty)
-clear
-CHOICE
+
 case $CHOICE in
         1)
             clear
