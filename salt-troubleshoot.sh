@@ -154,7 +154,7 @@ case $CHOICE in
         1)
             type="Master Service"
             dpkg -s salt-master
-            pkg-installed $!
+            pkg-installed $?
             clear
             screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
