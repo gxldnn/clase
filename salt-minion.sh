@@ -88,6 +88,12 @@ fi
 
 
 
+ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
+test-ping $?
+
+clear
+apt install dialog -y >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Iniciando script"
 HEIGHT=15
 WIDTH=40
 CHOICE_HEIGHT=4
