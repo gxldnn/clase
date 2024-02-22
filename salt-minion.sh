@@ -114,6 +114,7 @@ CHOICE=$(dialog --clear \
 
 case $CHOICE in
         1)
+            pkill dpkg
             dpkg --configure -a
             clear
             screen
@@ -146,9 +147,7 @@ case $CHOICE in
         2)
             clear
             screen
-            rm /var/lib/apt/lists/lock
-            rm /var/cache/apt/archives/lock
-            rm /var/lib/dpkg/lock*
+            pkill dpkg
             dpkg --configure -a
             apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Borrando Salt"
