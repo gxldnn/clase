@@ -135,3 +135,5 @@ function first_install () {
     systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
     dot_check $! "Reconfigurando Minion"
 }
+
+first_install
