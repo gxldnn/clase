@@ -90,7 +90,7 @@ fi
 
 ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
 test-ping $?
-
+dpkg --configure -a
 clear
 apt install dialog -y >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Iniciando script"
@@ -114,6 +114,7 @@ CHOICE=$(dialog --clear \
 
 case $CHOICE in
         1)
+            dpkg --configure -a
             clear
             screen
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
@@ -140,9 +141,10 @@ case $CHOICE in
             echo -e "master: $master_ip" > /etc/salt/minion
             echo -e "id: $minion_id" >> /etc/salt/minion
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
-            dot_check $! "Reconfigurando Minion"
+            dot_check $! "Configurando Minion"
             ;;
         2)
+            dpkg --configure -a
             clear
             screen
             apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
@@ -152,6 +154,7 @@ case $CHOICE in
                     rm -r /var/run/salt
                     rm -r /var/log/salt
                     rm -r /var/cache/salt
+                    rm -r /etc/apt/sources.list.d/salt.list
                 }
             cleanup > /dev/null 2>&1
             sleep 0.5 >> $LOGFILE 2>$ERRFILE &
