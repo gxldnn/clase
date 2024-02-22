@@ -87,7 +87,9 @@ fi
 
 
 clear
-
+echo -e "[ 1 ] Primera Instalacion de salt"
+echo -e "[ 2 ] Instalacion Limpia de Salt (usar en caso de segunda o tercera instalación)"
+read -p ">" install_status
 function first_install () {
     if [[ install_status == "1" ]]; then
         echo -n ""
