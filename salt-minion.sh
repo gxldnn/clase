@@ -37,12 +37,12 @@ function cross {
 ##
 
 function screen () {
-    echo -e ''$BLUE'  _________      .__   __               _____  .__       .__               
- /   _____/____  |  |_/  |_            /     \ |__| ____ |__| ____   ____  
- \_____   \__  \ |  |\   __\  ______  /  \ /  \|  |/    \|  |/  _ \ /    \ 
- /         / __ \|  |_|  |   /_____/ /    Y    \  |   |  \  (  <_> )   |  \
-/_______  (____  /____/__|           \____|__  /__|___|  /__|\____/|___|  /
-        \/     \/                            \/        \/               \/ '$RESET'      '
+    echo -e ''$BLUE'  _________      .__   __              _________ __                 __    
+ /   _____/____  |  |_/  |_           /   _____//  |______    ____ |  | __
+ \_____  \\__  \ |  |\   __\  ______  \_____  \\   __\__  \ _/ ___\|  |/ /
+ /        \/ __ \|  |_|  |   /_____/  /        \|  |  / __ \\  \___|    < 
+/_______  (____  /____/__|           /_______  /|__| (____  /\___  >__|_ \
+        \/     \/                            \/           \/     \/     \/'$RESET'      '
 }
 function finish_message {
         clear
@@ -129,7 +129,10 @@ TITULODEVENTANA="Salt installer by gxldnn"
 TITULODEMENU="Salt-Stack Minion Service"
 MENU="Escoge una de las opciones"
 
-OPTIONS=(1 "Instalar Salt Minion")
+OPTIONS=(1 "Instalar Salt Master"
+         2 "master is running? error message"
+         2 "Instalar Salt Minion"
+         3 "Minion [No Response] ERROR")
 
 CHOICE=$(dialog --clear \
                 --backtitle "$TITULODEVENTANA" \
