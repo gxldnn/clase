@@ -191,10 +191,13 @@ case $CHOICE in
         2)
             clear
             screen_message
-            systemctl stop salt-master.service >> $LOGFILE 2>$ERRFILE &
+            systemctl stop salt-master.service
+            sleep 2 >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Matando salt-master"
-            systemctl start salt-master.service >> $LOGFILE 2>$ERRFILE &
-            dot_check $! "Iniciando de nuevo salt-master"
+            
+            systemctl stop salt-master.service
+            sleep 2 >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Reiniciando la conexion"
             finish_message
             ;;
         3)
