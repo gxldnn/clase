@@ -87,29 +87,51 @@ fi
 
 
 clear
-screen
-ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
-test-ping $?
 
-echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
-read -p ">" master_ip
-echo -e "[$YELLOW!$RESET] Nombre del Minion"
-read -p ">" minion_id
+function first_install () {
+    if [[ install_status == "1" ]]; then
+        echo -n ""
+    else
+        screen
+        apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
+        dot_check $! "Borrando Salt"
+            function cleanup() {
+                rm -r /etc/salt/
+                rm -r /var/run/salt
+                rm -r /var/log/salt
+                rm -r /var/cache/salt
+            }
+        cleanup >> $LOGFILE 2>$ERRFILE &
+        dot_check $! "Limpiando salt-orphans"
+        sleep 2
+        dot_check $! "Entrando al installer"
+        
+    fi
+    clear
+    screen
+    ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
+    test-ping $?
+
+    echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
+    read -p ">" master_ip
+    echo -e "[$YELLOW!$RESET] Nombre del Minion"
+    read -p ">" minion_id
 
 
-apt update >> $LOGFILE
-apt install curl -y >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Instalando Curl"
-curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
-echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" > /etc/apt/sources.list.d/salt.list
-sleep 3 >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Descargando Repositorios"
-apt update >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Actualizando Repositorios"
-apt install salt-minion -y >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Instalando Salt-Minion"
+    apt update >> $LOGFILE
+    apt install curl -y >> $LOGFILE 2>$ERRFILE &
+    dot_check $! "Instalando Curl"
+    curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" > /etc/apt/sources.list.d/salt.list
+    sleep 3 >> $LOGFILE 2>$ERRFILE &
+    dot_check $! "Descargando Repositorios"
+    apt update >> $LOGFILE 2>$ERRFILE &
+    dot_check $! "Actualizando Repositorios"
+    apt install salt-minion -y >> $LOGFILE 2>$ERRFILE &
+    dot_check $! "Instalando Salt-Minion"
 
-echo -e "master: $master_ip" > /etc/salt/minion
-echo -e "id: $minion_id" >> /etc/salt/minion
-systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Reconfigurando Minion"
+    echo -e "master: $master_ip" > /etc/salt/minion
+    echo -e "id: $minion_id" >> /etc/salt/minion
+    systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
+    dot_check $! "Reconfigurando Minion"
+}
