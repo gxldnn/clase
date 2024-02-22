@@ -152,7 +152,20 @@ case $CHOICE in
             echo -e "id: $minion_id" >> /etc/salt/minion
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Finalizando Instalacion"
-            echo 
-
+            function finish_message {
+                clear
+                echo -e "  /$$$$$$  /$$   /$$ /$$       /$$$$$$$  /$$   /$$ /$$   /$$"
+                echo -e " /$$__  $$| $$  / $$| $$      | $$__  $$| $$$ | $$| $$$ | $$"
+                echo -e "| $$  \__/|  $$/ $$/| $$      | $$  \ $$| $$$$| $$| $$$$| $$"
+                echo -e "| $$ /$$$$ \  $$$$/ | $$      | $$  | $$| $$ $$ $$| $$ $$ $$"
+                echo -e "| $$|_  $$  >$$  $$ | $$      | $$  | $$| $$  $$$$| $$  $$$$"
+                echo -e "| $$  \ $$ /$$/\  $$| $$      | $$  | $$| $$\  $$$| $$\  $$\$"
+                echo -e "|  $$$$$$/| $$  \ $$| $$$$$$$$| $$$$$$\$/| $$ \  $$| $$ \  $$"
+                echo -e " \______/ |__/  |__/|________/|_______/ |__/  \__/|__/  \__/"
+                echo -e "                                                             "
+                echo -e "      ${GREEN}Instalación de Salt-Minion completada exitosamente.${RESET}"
+                echo -e "      Puedes comenzar a usar Salt para gestionar tus sistemas."
+            }
+            finish_message
             ;;
 esac
