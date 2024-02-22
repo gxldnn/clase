@@ -36,7 +36,7 @@ function cross {
 ##      MAIN FUNCTIONS
 ##
 
-function screen () {
+function screen_message () {
     echo -e ''$BLUE'  _________      .__   __              _________ __                 __    
  /   _____/____  |  |_/  |_           /   _____//  |______    ____ |  | __
  \_____  \\__  \ |  |\   __\  ______  \_____  \\   __\__  \ _/ ___\|  |/ /
@@ -146,7 +146,7 @@ case $CHOICE in
         1)
             type="Master Service"
             clear
-            screen
+            screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
             test-ping $?
 
@@ -161,7 +161,7 @@ case $CHOICE in
             dpkg --configure -a
             pkill dpkg
             clear
-            screen
+            screen_message
             rm -r /etc/salt/ >> $LOGFILE
             rm -r /var/run/salt >> $LOGFILE
             rm -r /var/log/salt >> $LOGFILE
@@ -188,10 +188,19 @@ case $CHOICE in
             dot_check $! "Finalizando Instalacion"
             finish_message
             ;;
+        2)
+            clear
+            screen_message
+            systecmtl stop salt-master.service >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Matando salt-master"
+            systecmtl start salt-master.service >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Iniciando de nuevo salt-master"
+            finish_message
+            ;;
         3)
             tyoe="Minion Service"
             clear
-            screen
+            screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
             test-ping $?
 
@@ -208,7 +217,7 @@ case $CHOICE in
             dpkg --configure -a
             pkill dpkg
             clear
-            screen
+            screen_message
             rm -r /etc/salt/ >> $LOGFILE
             rm -r /var/run/salt >> $LOGFILE
             rm -r /var/log/salt >> $LOGFILE
@@ -234,6 +243,14 @@ case $CHOICE in
             echo -e "id: $minion_id" >> /etc/salt/minion
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Finalizando Instalacion"
+            finish_message
+            ;;
+        4)
+            clear
+            screen_message
+            rm -r /etc/salt/pki/minion/minion_master.pub
+            systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Reestableciendo la conexion m-m"
             finish_message
             ;;
 esac
