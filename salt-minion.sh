@@ -150,7 +150,6 @@ case $CHOICE in
             rm /var/cache/apt/archives/lock
             rm /var/lib/dpkg/lock*
             dpkg --configure -a
-            apt update >> /dev/null 2>&1
             apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Borrando Salt"
                 function cleanup() {
