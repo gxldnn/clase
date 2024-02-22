@@ -199,6 +199,9 @@ case $CHOICE in
             finish_message
             ;;
         2)
+            type="Master Service"
+            dpkg -s salt-master
+            pkg-installed $?
             clear
             screen_message
             systemctl stop salt-master.service
@@ -261,6 +264,9 @@ case $CHOICE in
             finish_message
             ;;
         4)
+            type="Minion Service"
+            dpkg -s salt-minion
+            pkg-installed $?
             clear
             screen_message
             rm -r /etc/salt/pki/minion/minion_master.pub
