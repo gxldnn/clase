@@ -98,6 +98,14 @@ function test-ping() {
         echo -e "$STDCOLOR Conexion: \t$GREEN     OK $RESET"
 fi
 }
+function pkg-installed() {
+	if [ $1 -ne 0 ]; then
+        echo -e "$STDCOLOR  Conexion: \t$RED     No hay ningun $type instalado $RESET"
+        exit
+    else
+        echo -e "$STDCOLOR Conexion: \t$GREEN     OK $RESET"
+fi
+}
 function kill_dpkg_lock {
     local lockfile="/var/lib/dpkg/lock"
     if fuser $lockfile >/dev/null 2>&1; then
@@ -145,6 +153,8 @@ CHOICE=$(dialog --clear \
 case $CHOICE in
         1)
             type="Master Service"
+            dpkg -s salt-master
+            pkg-installed $!
             clear
             screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
@@ -202,6 +212,8 @@ case $CHOICE in
             ;;
         3)
             tyoe="Minion Service"
+            dpkg -s salt-master
+            pkg-installed $!
             clear
             screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
