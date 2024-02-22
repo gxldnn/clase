@@ -132,6 +132,11 @@ case $CHOICE in
             pkill dpkg
             clear
             screen
+            rm -r /etc/salt/ >> $LOGFILE
+            rm -r /var/run/salt >> $LOGFILE
+            rm -r /var/log/salt >> $LOGFILE
+            rm -r /var/cache/salt >> $LOGFILE
+            rm -r /etc/apt/sources.list.d/salt.list >> $LOGFILE
             apt install curl -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Instalando Curl"
             curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
