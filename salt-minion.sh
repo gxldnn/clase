@@ -144,9 +144,13 @@ case $CHOICE in
             dot_check $! "Configurando Minion"
             ;;
         2)
-            dpkg --configure -a
             clear
             screen
+            rm /var/lib/apt/lists/lock
+            rm /var/cache/apt/archives/lock
+            rm /var/lib/dpkg/lock*
+            dpkg --configure -a
+            apt update >> /dev/null 2>&1
             apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Borrando Salt"
                 function cleanup() {
@@ -156,7 +160,7 @@ case $CHOICE in
                     rm -r /var/cache/salt
                     rm -r /etc/apt/sources.list.d/salt.list
                 }
-            cleanup > /dev/null 2>&1
+            cleanup >> /dev/null 2>&1
             sleep 0.5 >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Limpiando salt-orphans"
             sleep 2
