@@ -191,9 +191,9 @@ case $CHOICE in
         2)
             clear
             screen_message
-            systecmtl stop salt-master.service >> $LOGFILE 2>$ERRFILE &
+            systemctl stop salt-master.service >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Matando salt-master"
-            systecmtl start salt-master.service >> $LOGFILE 2>$ERRFILE &
+            systemctl start salt-master.service >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Iniciando de nuevo salt-master"
             finish_message
             ;;
