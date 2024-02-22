@@ -146,7 +146,7 @@ case $CHOICE in
             dot_check $! "Actualizando Repositorios"
             apt install salt-minion -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Instalando Salt-Minion"
-
+            touch /etc/salt/minion
             echo -e "master: $master_ip" > /etc/salt/minion
             echo -e "id: $minion_id" >> /etc/salt/minion
             systemctl restart salt-minion.service >> $LOGFILE 2>$ERRFILE &
