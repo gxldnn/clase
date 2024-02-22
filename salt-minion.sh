@@ -96,7 +96,7 @@ dot_check $! "Iniciando script"
 HEIGHT=15
 WIDTH=40
 CHOICE_HEIGHT=4
-TITULODEVENTANA="Salt installe by gxldnn"
+TITULODEVENTANA="Salt installer by gxldnn"
 TITULODEMENU="Salt-Stack Minion Service"
 MENU="Escoge una de las opciones"
 
