@@ -114,8 +114,6 @@ CHOICE=$(dialog --clear \
 
 case $CHOICE in
         1)
-            pkill dpkg
-            dpkg --configure -a
             clear
             screen
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
@@ -126,8 +124,13 @@ case $CHOICE in
             echo -e "[$YELLOW!$RESET] Nombre del Minion"
             read -p ">" minion_id
 
-
+            pkill dpkg
+            dpkg --configure -a
+            pkill dpkg
             apt update >> $LOGFILE
+            pkill dpkg
+            dpkg --configure -a
+            pkill dpkg
             clear
             screen
             apt install curl -y >> $LOGFILE 2>$ERRFILE &
