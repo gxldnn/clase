@@ -152,7 +152,6 @@ case $CHOICE in
 
             echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
             read -p ">" master_ip
-            echo -e "[$YELLOW!$RESET] Nombre del Minion"
 
             pkill dpkg
             dpkg --configure -a
