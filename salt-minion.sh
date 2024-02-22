@@ -54,7 +54,7 @@ function finish_message {
      )_)  \/ _/ / / /\ \ \ ( (_____(  ) )__/ /   )_) \ (_(   )_) \ (_(  
      \_\____/   \/__\/__\/  \/_____/  \/___\/    \_\/ \/_/   \_\/ \/_/"
     echo
-    echo -e "      $GREEN Instalación de Salt-Minion completada exitosamente.${RESET}"
+    echo -e "      $GREEN Instalación de Salt-Stack $type completada exitosamente.${RESET}"
     echo "       Puedes comenzar a usar Salt para gestionar tus sistemas."
 }
 
@@ -144,6 +144,53 @@ CHOICE=$(dialog --clear \
 
 case $CHOICE in
         1)
+            type="Master Service"
+            clear
+            screen
+            ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
+            test-ping $?
+
+            echo -e "[$YELLOW!$RESET] Ip de el Salt-Master"
+            read -p ">" master_ip
+            echo -e "[$YELLOW!$RESET] Nombre del Minion"
+
+            pkill dpkg
+            dpkg --configure -a
+            pkill dpkg
+            apt update >> $LOGFILE
+            pkill dpkg
+            dpkg --configure -a
+            pkill dpkg
+            clear
+            screen
+            rm -r /etc/salt/ >> $LOGFILE
+            rm -r /var/run/salt >> $LOGFILE
+            rm -r /var/log/salt >> $LOGFILE
+            rm -r /var/cache/salt >> $LOGFILE
+            rm -r /etc/apt/sources.list.d/salt.list >> $LOGFILE
+            apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Limpiando anterior salt"
+            apt install curl -y >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Instalando Curl"
+            curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
+            echo "deb [signed-by=/etc/apt/keyrings/salt-archive-keyring-2023.gpg arch=amd64] https://repo.saltproject.io/salt/py3/debian/12/amd64/latest bookworm main" > /etc/apt/sources.list.d/salt.list
+            sleep 3 >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Descargando Repositorios"
+            apt update >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Actualizando Repositorios"
+            kill_dpkg_lock
+            kill_dpkg_lock-frontend
+            apt install salt-master -y >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Instalando Salt-Master"
+            systemctl restart salt-master.service >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Configurando Master"
+            echo -e "master: $master_ip" > /etc/salt/minion
+            systemctl restart salt-master.service >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Finalizando Instalacion"
+            finish_message
+            ;;
+        3)
+            tyoe="Minion Service"
             clear
             screen
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
@@ -168,6 +215,8 @@ case $CHOICE in
             rm -r /var/log/salt >> $LOGFILE
             rm -r /var/cache/salt >> $LOGFILE
             rm -r /etc/apt/sources.list.d/salt.list >> $LOGFILE
+            apt purge salt-common -y >> $LOGFILE 2>$ERRFILE &
+            dot_check $! "Limpiando anterior salt"
             apt install curl -y >> $LOGFILE 2>$ERRFILE &
             dot_check $! "Instalando Curl"
             curl -fsSL -o /etc/apt/keyrings/salt-archive-keyring-2023.gpg https://repo.saltproject.io/salt/py3/debian/12/amd64/SALT-PROJECT-GPG-PUBKEY-2023.gpg
