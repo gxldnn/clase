@@ -154,11 +154,6 @@ case $CHOICE in
         1)
             clear
             screen_message
-            type="Master Service"
-            dpkg -s salt-master >> $LOGFILE 2>$ERRFILE
-            pkg-installed $? 
-            clear
-            screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
             test-ping $?
 
@@ -218,11 +213,6 @@ case $CHOICE in
             finish_message
             ;;
         3)
-            clear
-            screen_message
-            type="Minion Service"
-            dpkg -s salt-minion >> $LOGFILE 2>$ERRFILE
-            pkg-installed $?
             clear
             screen_message
             ping -c 1 -W 5 google.com >> $LOGFILE 2>$ERRFILE &
