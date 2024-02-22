@@ -154,7 +154,7 @@ case $CHOICE in
             dot_check $! "Finalizando Instalacion"
             function finish_message {
                 clear
-                echo -e "           ______      __  __     __        _____      __   __     __   __   
+                echo -e "                            ______      __  __     __        _____      __   __     __   __   
                  /_/\___\   /\  /\  /\  /\_\      /\ __/\    /_/\ /\_\   /_/\ /\_\  
                  ) ) ___/   \ \ \/ / / ( ( (      ) )  \ \   ) ) \ ( (   ) ) \ ( (  
                 /_/ /  ___   \ \  / /   \ \_\    / / /\ \ \ /_/   \ \_\ /_/   \ \_\ 
@@ -162,8 +162,8 @@ case $CHOICE in
                  )_)  \/ _/ / / /\ \ \ ( (_____(  ) )__/ /   )_) \ (_(   )_) \ (_(  
                  \_\____/   \/__\/__\/  \/_____/  \/___\/    \_\/ \/_/   \_\/ \/_/"
                 echo
-                echo "      ${GREEN}Instalación de Salt-Minion completada exitosamente.${RESET}"
-                echo "      Puedes comenzar a usar Salt para gestionar tus sistemas."
+                echo -e "      $GREEN Instalación de Salt-Minion completada exitosamente.${RESET}"
+                echo "       Puedes comenzar a usar Salt para gestionar tus sistemas."
             }
             finish_message
             ;;
