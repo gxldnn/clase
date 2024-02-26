@@ -1,4 +1,13 @@
+import os
+import platform
 import paramiko
+
+# Function to clear the terminal screen
+def clear_screen():
+    if platform.system() == 'Windows':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 # ANSI escape codes for colors
 class colors:
@@ -58,6 +67,8 @@ def execute_remote_script(host, username, password, local_script_path, remote_sc
         stdin, stdout, stderr = ssh_client.exec_command(f'bash {remote_script_path}')
 
         # Print output header
+        print(colors.OKGREEN + "Authentication succesfull!" + colors.ENDC)
+        print(colors.OKGREEN + stdout.read().decode() + colors.ENDC)
         print(colors.HEADER + "> Output from remote script:" + colors.ENDC)
 
         # Print stdout
@@ -74,19 +85,23 @@ def execute_remote_script(host, username, password, local_script_path, remote_sc
     except Exception as e:
         print(f"{colors.FAIL}Error: {e}{colors.ENDC}")
 
-# Take target IP as input
+# Clear the terminal screen
+clear_screen()
+
+# Take target IP, username, and password as input
 host = input("Enter the target IP address: ")
-username = 'your_username'
-password = 'your_password'  # You may want to modify this to get password input securely
+username = input("Enter your username: ")
+password = input("Enter your password: ")  # You may want to modify this to get password input securely
 
 # Choose between executing a single command or running a remote script
 choice = input("Choose an option:\n1. Execute a single shell command\n2. Execute a remote shell script\nEnter your choice (1 or 2): ")
 
+clear_screen()
 if choice == '1':
     command = input("Enter the shell command to execute remotely: ")
     execute_remote_command(host, username, password, command)
 elif choice == '2':
-    local_script_path = '/srv/oneshot/salt-troubleshoot.sh'  # Update with the path to your local script
+    local_script_path = 'C:/Users/Jan/Documents/.Proyectos/asd.sh'  # Update with the path to your local script
     remote_script_path = '/srv/oneshot/salt-troubleshoot.sh'  # Update with the path where you want to upload the script on the remote server
     execute_remote_script(host, username, password, local_script_path, remote_script_path)
 else:
