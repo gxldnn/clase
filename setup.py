@@ -1,41 +1,23 @@
 import os
 import subprocess
+import sys
 
-def create_virtual_environment(env_name):
+def install_requirements(requirements_file):
     try:
-        subprocess.run(["python", "-m", "venv", env_name], check=True)
-        print(f"Entorno virtual '{env_name}' creado con éxito.")
-    except subprocess.CalledProcessError:
-        print(f"Error al crear el entorno virtual '{env_name}'.")
-
-def install_requirements(env_name, requirements_file):
-    try:
-        subprocess.run([os.path.join(env_name, "bin", "pip"), "install", "-r", requirements_file], check=True)
+        subprocess.run(["pip", "install", "-r", requirements_file], check=True)
         print("Requerimientos instalados con éxito.")
     except subprocess.CalledProcessError:
         print("Error al instalar los requerimientos.")
 
-def execute_script(env_name, script_path):
-    try:
-        subprocess.run([os.path.join(env_name, "bin", "python"), script_path], check=True)
-        print("Script ejecutado con éxito.")
-    except subprocess.CalledProcessError:
-        print("Error al ejecutar el script.")
-
 def main():
-    # Nombre del entorno virtual y archivo de requerimientos
-    env_name = "myenv"
-    requirements_file = "requirements.txt"
-    script_path = "mi_script.py"
+    # Get the directory where the script is located
+    script_dir = os.path.dirname(os.path.realpath(__file__))
 
-    # Crear entorno virtual
-    create_virtual_environment(env_name)
-
-    # Instalar requerimientos
-    install_requirements(env_name, requirements_file)
-
-    # Ejecutar script
-    execute_script(env_name, script_path)
+    if len(sys.argv) != 2:
+        print(f"Uso: python {sys.argv[0]} <archivo_requerimientos>")
+        sys.exit(1)
+    
+    install_requirements(requirements.txt)
 
 if __name__ == "__main__":
     main()
