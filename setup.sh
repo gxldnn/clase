@@ -12,7 +12,9 @@ install_requirements() {
         "Pillow"
         "ipaddress"
     )
-
+cd /root/
+python -m venv oneshot
+source oneshot/bin/active
     for pkg in "${requirements[@]}"; do
         if pip install "$pkg"; then
             echo "Paquete '$pkg' instalado con éxito."
