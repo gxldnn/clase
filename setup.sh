@@ -35,7 +35,7 @@ main() {
 
 
 python3 -m venv /root/oneshot
-source oneshot/bin/activate
+source /root/oneshot/bin/activate
 read -p "Presionar [Enter] per a executar oneshot.py"
 python3 $(pwd)/oneshot.py
 main
