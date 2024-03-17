@@ -19,7 +19,6 @@ CROSS = u"\u2718"
 STDCOLOR = "\033[96m"
 ERRCOLOR = "\033[91m"
 
-
 def install_requirements():
     requirements = [
         "paramiko",
@@ -87,16 +86,22 @@ def run():
         create_virtualenv()
         activate_virtualenv()
         main()
-        input("Ha de presionar [Enter] per a executar oneshot.py")
-        command = ['python3', '$(pwd)/oneshot.py']
-        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        process.communicate()
-
+        input("El Setup ha fet correctament la seva funció, si us plau executi oneshot.py [Enter]: ")
 
 def activate_virtualenv():
-    command = ['source', '/root/oneshot/bin/activate']
-    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    process.communicate()
+    activate_script = os.path.join('/root/oneshot', 'bin', 'activate')
+    if os.path.exists(activate_script):
+        activate_cmd = f"source {activate_script} && env"
+        proc = subprocess.Popen(activate_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+        stdout, stderr = proc.communicate()
+        if proc.returncode == 0:
+            env_vars = dict(line.split("=", 1) for line in stdout.decode().splitlines())
+            os.environ.update(env_vars)
+            print("Virtual environment activated successfully.")
+        else:
+            print("Error activating virtual environment.")
+    else:
+        print("Virtual environment activation script not found.")
 
 if __name__ == "__main__":
     run()
