@@ -16,8 +16,9 @@ def main():
     if len(sys.argv) != 2:
         print(f"Uso: python {sys.argv[0]} <archivo_requerimientos>")
         sys.exit(1)
-    
-    install_requirements(requirements.txt)
+
+    requirements_file = os.path.join(script_dir, sys.argv[1])
+    install_requirements(requirements_file)
 
 if __name__ == "__main__":
     main()
