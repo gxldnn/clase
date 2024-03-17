@@ -219,29 +219,19 @@ def execute_remote_script(host, username, password, local_script_path, remote_sc
   
 ##########       EXTRA       ##########
 
-def mostrar_imagen(ruta, width, height, x_pos, y_pos):
-    def get_image_viewer():
-        system = platform.system()
-        if system == 'Linux':
-            # Check if the image viewer 'feh' is available
-            result = subprocess.run(['which', 'feh'], capture_output=True, text=True)
-            if result.returncode == 0:
-                return 'feh'
-            else:
-                return 'eog'
-    try:
-        imagen = Image.open(ruta)
-        imagen = imagen.resize((width, height))
-        imagen.show()
 
-        # Use wmctrl to move the window to the specified position
-        window_name = get_image_viewer()
-        windows = subprocess.check_output(['wmctrl', '-l']).decode('utf-8').split('\n')
-        for window in windows:
-            if window_name in window:
-                window_id = window.split()[0]
-                subprocess.run(['wmctrl', '-ir', window_id, '-e', f'0,{x_pos},{y_pos},-1,-1'], check=True)
-                break
+def mostrar_imagen(ruta, width, height, x_pos, y_pos):
+    try:
+        # Open the image using xdg-open
+        subprocess.run(['xdg-open', ruta], check=True)
+
+        # Sleep for a short duration to ensure the window is fully opened
+        # Adjust the sleep duration if needed
+        time.sleep(1)
+
+        # Use xdotool to move the window to the specified position
+        move_cmd = ["xdotool", "search", "--name", os.path.basename(ruta), "windowmove", "--sync", "%1", str(x_pos), str(y_pos)]
+        subprocess.run(move_cmd, check=True)
     except Exception as e:
         print(f"Error al abrir la imagen: {e}")
 
