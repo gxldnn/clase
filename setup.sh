@@ -62,6 +62,9 @@ function direct_check {
             ;;
     esac
 }
+mkdir $(pwd)/oneshot
+touch $LOGFILE
+touch $ERRFILE
 
 apt install -y pip >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Intstalande pip"
