@@ -10,6 +10,9 @@ CYAN="\e[36m"
 GREY="\e[37m"
 RESET="\e[0m"
 
+TICK="\xE2\x9C\x93"
+CROSS="\xE2\x9C\x98"
+
 STDCOLOR="\e[96m"
 ERRCOLOR="\e[91m"
 install_requirements() {
@@ -26,9 +29,9 @@ install_requirements() {
     )
     for pkg in "${requirements[@]}"; do
         if pip install "$pkg"  >> $LOGFILE 2>$ERRFILE; then
-            echo "Paquete '$pkg' instalado con éxito."
+            echo "Paquet '$pkg' instalat correctament."
         else
-            echo "Error al instalar el paquete '$pkg'."
+            echo "Error al instalar paquet '$pkg'."
             exit 1
         fi
     done
@@ -36,7 +39,7 @@ install_requirements() {
 
 main() {
     if ! command -v pip >/dev/null; then
-        echo "Error: pip no está instalado. Asegúrate de tener Python y pip instalados."
+        echo "Error: pip no está instal·lat"
         exit 1
     fi
 
@@ -77,14 +80,16 @@ mkdir $(pwd)/setup
 touch $LOGFILE
 touch $ERRFILE
 clear
-apt install -y pip >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Intstalando pip"
+
+
 apt install -y python3 >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Intstalando python"
+dot_check $! "Intstalant python"
+apt install -y pip >> $LOGFILE 2>$ERRFILE &
+dot_check $! "Intstalant pip"
 apt install -y python3-venv >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Intstalando venv"
+dot_check $! "Intstalant venv"
 python3 -m venv /root/oneshot >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Creando entorno virtualizado"
+dot_check $! "Creant entorn virtualitzat"
 source /root/oneshot/bin/activate
 main
 read -p "Ha de presionar [Enter] per a executar oneshot.py"
