@@ -219,26 +219,34 @@ def execute_remote_script(host, username, password, local_script_path, remote_sc
   
 ##########       EXTRA       ##########
 
-
 def mostrar_imagen(ruta, width, height, x_pos, y_pos):
     def get_image_viewer():
         system = platform.system()
         if system == 'Linux':
-            # Check if the image viewer 'feh' is available
-            result = subprocess.run(['which', 'feh'], capture_output=True, text=True)
+            # Check if the image viewer 'eog' is available
+            result = subprocess.run(['which', 'eog'], capture_output=True, text=True)
             if result.returncode == 0:
-                return 'feh'
-            else:
                 return 'eog'
-    try:
-        imagen = Image.open(ruta)
-        imagen = imagen.resize((width, height))
-        imagen.show()
+            else:
+                return None  # Return None if eog is not found
 
-        # Use wmctrl to move the window to the specified position
-        move_cmd = ["wmctrl", "-r", "feh", "-e", f"0,{x_pos},{y_pos},-1,-1"]
-        subprocess.run(move_cmd, check=True)
-    except Exception as e:
+    try:
+         imagen = Image.open(ruta)
+         imagen = imagen.resize((width, height))
+         imagen.show()
+ 
+         image_viewer = get_image_viewer()
+ 
+         if image_viewer == 'eog':
+             # If using eog, we can't directly position the window via command line
+             print("eog does not support window positioning via command line.")
+             print("You may need to manually position the window.")
+ 
+         else:
+             # If feh is being used, move the window using wmctrl
+             move_cmd = ["wmctrl", "-r", "feh", "-e", f"0,{x_pos},{y_pos},-1,-1"]
+             subprocess.run(move_cmd, check=True)   
+    except Exception as e:       
         print(f"Error al abrir la imagen: {e}")
 
         
