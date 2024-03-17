@@ -98,12 +98,12 @@ def localnetipgrab():
     ]
 
     custom_variable_names = {
-        "Salt Master IP": "saltmasterip",
         "NFTABLES External IP": "nftablesipext",
         "NFTABLES LAN IP": "nftablesiplan",
         "NFTABLES DMZ IP": "nftablesipdmz",
-        "DHCP-DNS IP": "dhcpip",
+        "Salt Master IP": "saltmasterip",
         "WebServer IP": "webip",
+        "DHCP-DNS IP": "dhcpip",
         "VPN IP": "vpnip",
         "CA IP": "caip",
     }
