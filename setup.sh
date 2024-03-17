@@ -1,5 +1,6 @@
 #!/bin/bash
-
+apt install -y python3
+apt install -y python3-venv
 install_requirements() {
     local requirements=(
         "paramiko"
