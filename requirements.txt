@@ -1,0 +1,9 @@
+paramiko
+base64
+traceback2
+keyboard
+platformdirs
+rich
+simple-term-menu
+Pillow
+ipaddress
