@@ -19,6 +19,7 @@ CROSS = u"\u2718"
 STDCOLOR = "\033[96m"
 ERRCOLOR = "\033[91m"
 
+
 def install_requirements():
     requirements = [
         "paramiko",
@@ -87,6 +88,10 @@ def run():
         activate_virtualenv()
         main()
         input("Ha de presionar [Enter] per a executar oneshot.py")
+        command = ['python3', '$(pwd)/oneshot.py']
+        process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process.communicate()
+
 
 def activate_virtualenv():
     command = ['source', '/root/oneshot/bin/activate']
