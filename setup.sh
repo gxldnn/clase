@@ -62,7 +62,7 @@ function direct_check {
             ;;
     esac
 }
-mkdir $(pwd)/oneshot
+mkdir $(pwd)/setup
 touch $LOGFILE
 touch $ERRFILE
 
