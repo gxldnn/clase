@@ -235,8 +235,8 @@ def mostrar_imagen(ruta, width, height, x_pos, y_pos):
         imagen = imagen.resize((width, height))
         imagen.show()
 
-        # Use wmctrl to move the window to the specified position
-        move_cmd = ["wmctrl", "-r", "feh", "-e", f"0,{x_pos},{y_pos},-1,-1"]
+        # Use xdotool to move the window to the specified position
+        move_cmd = ["xdotool", "search", "--name", get_image_viewer(), "windowmove", "--sync", "%1", str(x_pos), str(y_pos)]
         subprocess.run(move_cmd, check=True)
     except Exception as e:
         print(f"Error al abrir la imagen: {e}")
