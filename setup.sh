@@ -1,7 +1,17 @@
 #!/bin/bash
 LOGFILE="$(pwd)/setup/log.log"
 ERRFILE="$(pwd)/setup/err.log"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+CYAN="\e[36m"
+GREY="\e[37m"
+RESET="\e[0m"
 
+STDCOLOR="\e[96m"
+ERRCOLOR="\e[91m"
 install_requirements() {
     local requirements=(
         "paramiko"
@@ -67,7 +77,7 @@ touch $LOGFILE
 touch $ERRFILE
 
 apt install -y pip >> $LOGFILE 2>$ERRFILE &
-dot_check $! "Intstalande pip"
+dot_check $! "Intstalando pip"
 apt install -y python3 >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Intstalando python"
 apt install -y python3-venv >> $LOGFILE 2>$ERRFILE &
