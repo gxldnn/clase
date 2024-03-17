@@ -24,9 +24,9 @@ def execute_script(env_name, script_path):
 
 def main():
     # Nombre del entorno virtual y archivo de requerimientos
-    env_name = "oneshot"
+    env_name = "myenv"
     requirements_file = "requirements.txt"
-    script_path = "/root/clase/oneshot.py"
+    script_path = "mi_script.py"
 
     # Crear entorno virtual
     create_virtual_environment(env_name)
@@ -39,4 +39,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
