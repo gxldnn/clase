@@ -85,7 +85,7 @@ apt install -y python3-venv >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Intstalando venv"
 python3 -m venv /root/oneshot >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Creando entorno virtualizado"
-source /root/oneshot/bin/activate >> $LOGFILE 2>$ERRFILE &
+source /root/oneshot/bin/activate
 main
 read -p "Presioni [Enter] per a executar oneshot.py"
 python3 $(pwd)/oneshot.py
