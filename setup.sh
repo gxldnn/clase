@@ -3,7 +3,7 @@
 install_requirements() {
     local requirements=(
         "paramiko"
-        "base64"
+        "tabulate"
         "traceback2"
         "keyboard"
         "platformdirs"
@@ -12,9 +12,6 @@ install_requirements() {
         "Pillow"
         "ipaddress"
     )
-cd /root/
-python -m venv oneshot
-source oneshot/bin/active
     for pkg in "${requirements[@]}"; do
         if pip install "$pkg"; then
             echo "Paquete '$pkg' instalado con éxito."
@@ -35,3 +32,8 @@ main() {
 }
 
 main
+
+python3 -m venv /root/oneshot
+source oneshot/bin/activate
+read -p "Presionar [Enter] per a executar oneshot.py"
+python3 $(pwd)/oneshot.py
