@@ -72,10 +72,11 @@ function direct_check {
             ;;
     esac
 }
+
 mkdir $(pwd)/setup
 touch $LOGFILE
 touch $ERRFILE
-
+clear
 apt install -y pip >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Intstalando pip"
 apt install -y python3 >> $LOGFILE 2>$ERRFILE &
