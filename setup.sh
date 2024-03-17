@@ -1,7 +1,4 @@
 #!/bin/bash
-apt install -y pip
-apt install -y python3
-apt install -y python3-venv
 install_requirements() {
     local requirements=(
         "paramiko"
@@ -31,11 +28,14 @@ main() {
     fi
 
     install_requirements
+    clear
 }
 
-
+apt install -y pip
+apt install -y python3
+apt install -y python3-venv
 python3 -m venv /root/oneshot
 source /root/oneshot/bin/activate
+main
 read -p "Presionar [Enter] per a executar oneshot.py"
 python3 $(pwd)/oneshot.py
-main
