@@ -87,12 +87,12 @@ def tarea(progress, tiempo):
 def localnetipgrab():
     ip_addresses = {}
     ip_info = [
-        ("Salt Master IP", "green"),
         ("NFTABLES External IP", "blue"),
         ("NFTABLES LAN IP", "yellow"),
         ("NFTABLES DMZ IP", "red"),
+        ("Salt Master IP", "green"),
+        ("WebServer IP", "magenta"),        
         ("DHCP-DNS IP", "purple"),
-        ("WebServer IP", "magenta"),
         ("VPN IP", "cyan"),
         ("CA IP", "cyan"),
     ]
