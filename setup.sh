@@ -1,4 +1,5 @@
 #!/bin/bash
+apt install -y pip
 apt install -y python3
 apt install -y python3-venv
 install_requirements() {
