@@ -22,6 +22,7 @@ import base64
 import traceback
 import subprocess
 import keyboard
+import platform
 import socket
 import ipaddress
 import concurrent.futures
@@ -218,13 +219,29 @@ def execute_remote_script(host, username, password, local_script_path, remote_sc
   
 ##########       EXTRA       ##########
 
-def mostrar_imagen(ruta):
+
+def mostrar_imagen(ruta, width, height, x_pos, y_pos):
+    def get_image_viewer():
+        system = platform.system()
+        if system == 'Linux':
+            # Check if the image viewer 'feh' is available
+            result = subprocess.run(['which', 'feh'], capture_output=True, text=True)
+            if result.returncode == 0:
+                return 'feh'
+            else:
+                return 'eog'
     try:
         imagen = Image.open(ruta)
+        imagen = imagen.resize((width, height))
         imagen.show()
+
+        # Use wmctrl to move the window to the specified position
+        move_cmd = ["wmctrl", "-r", "feh", "-e", f"0,{x_pos},{y_pos},-1,-1"]
+        subprocess.run(move_cmd, check=True)
     except Exception as e:
         print(f"Error al abrir la imagen: {e}")
 
+        
 def goback_return():
     input("Prem Enter per a tornar al inici")
     p = subprocess.Popen("python oneshot.py", shell=True)
@@ -337,12 +354,12 @@ if __name__ == "__main__":
                 output_file_path = "/tmp/abel.jpg" 
                 base64_show(base64_image, output_file_path)
                 ruta_imagen = "/tmp/abel.jpg"
-                mostrar_imagen(ruta_imagen)
+                mostrar_imagen(ruta_imagen, 400, 400, 0, 0)
                 base64_image = f"{bernat64}"
                 output_file_path = "/tmp/bernat.jpg"
                 base64_show(base64_image, output_file_path)
                 ruta_imagen = "/tmp/bernat.jpg"
-                mostrar_imagen(ruta_imagen)
+                mostrar_imagen(ruta_imagen, 400, 400, 350, 340)
                 clear_terminal()      
                 print("[bold red]◄ Heu sortit de l'script 🖕🏻 ►[/bold red]")
                 break
