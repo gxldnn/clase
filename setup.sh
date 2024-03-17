@@ -87,5 +87,5 @@ python3 -m venv /root/oneshot >> $LOGFILE 2>$ERRFILE &
 dot_check $! "Creando entorno virtualizado"
 source /root/oneshot/bin/activate
 main
-read -p "Presioni [Enter] per a executar oneshot.py"
+read -p "Ha de presionar [Enter] per a executar oneshot.py"
 python3 $(pwd)/oneshot.py
