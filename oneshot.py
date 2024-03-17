@@ -219,7 +219,6 @@ def execute_remote_script(host, username, password, local_script_path, remote_sc
   
 ##########       EXTRA       ##########
 
-
 def mostrar_imagen(ruta, width, height, x_pos, y_pos):
     def get_image_viewer():
         system = platform.system()
@@ -235,9 +234,14 @@ def mostrar_imagen(ruta, width, height, x_pos, y_pos):
         imagen = imagen.resize((width, height))
         imagen.show()
 
-        # Use xdotool to move the window to the specified position
-        move_cmd = ["xdotool", "search", "--name", get_image_viewer(), "windowmove", "--sync", "%1", str(x_pos), str(y_pos)]
-        subprocess.run(move_cmd, check=True)
+        # Use wmctrl to move the window to the specified position
+        window_name = get_image_viewer()
+        windows = subprocess.check_output(['wmctrl', '-l']).decode('utf-8').split('\n')
+        for window in windows:
+            if window_name in window:
+                window_id = window.split()[0]
+                subprocess.run(['wmctrl', '-ir', window_id, '-e', f'0,{x_pos},{y_pos},-1,-1'], check=True)
+                break
     except Exception as e:
         print(f"Error al abrir la imagen: {e}")
 
