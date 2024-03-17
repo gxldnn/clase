@@ -89,9 +89,9 @@ def run():
         input("El Setup ha fet correctament la seva funció, si us plau executi oneshot.py [Enter]: ")
 
 def activate_virtualenv():
-    activate_script = os.path.join('/root/oneshot', 'bin', 'activate')
+    activate_script = os.path.join('root', 'oneshot', 'bin', 'activate')
     if os.path.exists(activate_script):
-        activate_cmd = f"source {activate_script} && env"
+        activate_cmd = f"source {activate_script}"
         proc = subprocess.Popen(activate_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         stdout, stderr = proc.communicate()
         if proc.returncode == 0:
