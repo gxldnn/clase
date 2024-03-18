@@ -20,6 +20,10 @@ STDCOLOR = "\033[96m"
 ERRCOLOR = "\033[91m"
 
 def install_requirements():
+    # Path to the virtual environment activation script
+    activate_script = "/root/oneshot/bin/activate"
+
+    # Requirements to install
     requirements = [
         "paramiko",
         "tabulate",
@@ -31,12 +35,15 @@ def install_requirements():
         "Pillow",
         "ipaddress",
     ]
+    
+    # Activate the virtual environment and install requirements
     for pkg in requirements:
-        result = subprocess.run(['pip', 'install', pkg], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        command = f"source {activate_script} && pip install {pkg}"
+        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode == 0:
-            print(f"Paquet '{pkg}' instal·lat correctament.")
+            print(f"Package '{pkg}' installed successfully.")
         else:
-            print(f"Error al instalar paquet '{pkg}'.")
+            print(f"Error installing package '{pkg}': {result.stderr.decode()}")
             exit(1)
 
 def dot_check(process_id, message):
