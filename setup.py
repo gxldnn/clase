@@ -36,10 +36,13 @@ def install_requirements():
         "ipaddress",
     ]
     
-    # Activate the virtual environment and install requirements
+    # Construct the Python interpreter path within the virtual environment
+    python_interpreter = os.path.join("/root/oneshot/bin", "python")
+
+    # Install requirements within the virtual environment
     for pkg in requirements:
-        command = f"source {activate_script} && pip install {pkg}"
-        result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        command = [python_interpreter, "-m", "pip", "install", pkg]
+        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode == 0:
             print(f"Package '{pkg}' installed successfully.")
         else:
