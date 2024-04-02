@@ -229,11 +229,9 @@ http {
 #}" > /etc/nginx/nginx.conf
 }
 function sftp_configuration() {
-    
     chmod 755 /var/www/$domain
     chmod -R 775 /var/www/$domain/html/
     chown -R root:$user /var/www/$domain/
-    
    
     echo -e "
     Match Group $user
@@ -245,6 +243,7 @@ function sftp_configuration() {
 
     systemctl restart sshd
 }
+
 function ssl_ssk() {
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout "/etc/ssl/private/$domain.key" -out "/etc/ssl/certs/$domain.crt" -subj "/C=ES/ST=Catalunya/L=Barcelona/O=IJR & Moska Trust Services/OU=IJR & Moska Trust Services/CN=$domain/emailAddress=$email"
     execute_flag_ssk=1
