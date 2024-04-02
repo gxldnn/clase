@@ -142,7 +142,7 @@ function newcomer() {
     
     # Directory creation
     mkdir -p /var/www/$domain/html
-
+}
 function buffer_bucket(){
     echo "user www-data;
 worker_processes auto;
