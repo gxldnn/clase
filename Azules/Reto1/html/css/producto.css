@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color: white;
+}
+
+header {
+  background-color: #333;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header img {
+  width: 100px;
+}
+
+.menu-container {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.line {
+  display: block;
+  width: 30px;
+  height: 3px;
+  margin: 6px 0;
+  background-color: white;
+  transition: 0.4s;
+}
+
+.menu-icon.active .line:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-icon.active .line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.active .line:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.header {
+  display: flex;
+}
+
+.header a {
+  display: block;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.additional-links {
+  display: flex;
+  align-items: center;
+}
+
+.additional-links a {
+  color: #420404;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+.additional-links a.img:hover {
+  background-color: transparent;
+  color: white;
+  transition: none;
+}
+
+.additional-links a.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 50px;
+  background-color: #0055ff;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.additional-links a.btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.additional-links img {
+  width: 40px;
+}
+
+.product-container {
+  display: flex;
+}
+
+.product-image {
+  flex: 1;
+}
+
+.product-image img {
+  width: 800px;
+  margin-left: 70px;
+}
+
+.product-details {
+  flex: 1;
+  padding: 20px;
+}
+
+.product-details h1 {
+  font-size: 50px;
+  margin-bottom: 0px;
+}
+
+.product-details p {
+  font-size: 25px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.price-button {
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.price-button p {
+  margin-top: 50px;
+  text-align: start;
+  font-size: 35px;
+  color: #333;
+  font-weight: bold;
+  text-align: justify;
+  margin-left: 20px;  
+  margin-right: 20px;
+}
+
+.price-button .btn {
+  justify-content: start;
+  padding: 20px 150px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.price-button .btn:hover {
+  background-color: #0056b3;
+}
+
+.contact-info {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.contact-info img {
+  width: 100px;
+  margin-right: 20px;
+}
+
+.contact-info ul {
+  font-size: 18px;
+  text-align: left;
+}
+
+.contact-info li b {
+  font-weight: bold;
+}
+
+@media (max-width: 800px) {
+  nav {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .header {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .header.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+  }
+
+  .menu-icon.active + .header {
+    display: flex;
+  }
+  
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-image img {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .product-details {
+    padding: 10px;
+    text-align: justify;
+    margin-left: 20px;   /* Agregado espacio a la izquierda */
+    margin-right: 20px;  /* Agregado espacio a la derecha */
+  }
+
+  .product-details h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .product-details p {
+    font-size: 20px;
+  }
+
+  .price-button {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .price-button p {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 28px;
+  }
+
+  .price-button .btn {
+    padding: 20px 100px;
+    width: 100%;
+    max-width: 350px;
+    margin: 10px auto;
+    justify-content: center;
+  }
+  
+  .footer-margin {
+    margin-bottom: 20px;
+  }
+}
