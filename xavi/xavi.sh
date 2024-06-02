@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function pdispcat(){
-    cat programas.txt | grep "@" | awk {print $2, $3}
+    cat programas.txt | grep "@" | awk '{print $2, $3}'
 
 }
 #function lavado(){
