@@ -45,6 +45,7 @@ while true; do
         ;;
         1)
         lavado
+        break
         ;;
         2)
         ;;
