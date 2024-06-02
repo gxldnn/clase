@@ -14,9 +14,9 @@ function lavado(){
    case programa in
         0|[Ss][Uu][Aa][Vv][Ee])
         echo "### OK ejecutando ###"
-        cat programas.txt | grep
+        cat programas.txt | awk 'NR==1' | awk '{print $1}'
         ;;
-        1|[Ii][Nn][Tt][Ee][Nn][Ss][Oo])
+        1|[Ii][Nn][Tt][Ee][Nn][Ss][Oo])j
         ;;
         2|[Ll][Aa][Nn][Aa])
         ;;
@@ -25,25 +25,6 @@ function lavado(){
 
     esac
 }
-
-extract_program() {
-  local program_name="$1"
-  awk -v program="$program_name" '
-  BEGIN { print_program = 0 }
-  {
-    if ($0 ~ "^@ " program) {
-      print_program = 1
-      next
-    } 
-    if ($0 ~ "^@ " && print_program) {
-      print_program = 0
-    }
-    if (print_program) {
-      print
-    }
-  }' "$FILE"
-}
-
 #function atiempo(){
 #    
 #}
@@ -66,7 +47,6 @@ while true; do
         lavado
         ;;
         2)
-        extract_program "Programa suave""
         ;;
 
     esac
