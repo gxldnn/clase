@@ -18,7 +18,7 @@ function pdispcat(){
 
 read -p "Select:" selections
 case selection in
-    0)
+    *)
     pdispcat
     ;;
 esac
