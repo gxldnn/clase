@@ -1,18 +1,18 @@
 #!/bin/bash
 
-funciton pdispcat(){
+function pdispcat(){
     cat programas.txt | grep -A 1000 '^@' | awk '/^@/ {if (NR != 1) print ""; print; next} {print}'
 
 }
-funciton lavado(){
+function lavado(){
     
 }
 
-funciton atiempo(){
+function atiempo(){
     
 }
 
-funciton centri(){
+function centri(){
     
 }
 
