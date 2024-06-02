@@ -4,10 +4,22 @@ function pdispcat(){
     cat programas.txt | grep "@" | awk '{print $2, $3}'
 
 }
-#function lavado(){
-#    
-#}
-#
+function lavado(){
+   clear
+   echo -e "Que progarma quieres ejecutar?"
+   read -p ">" programa
+   case programa in
+        0)
+        pdispcat
+        echo -e "Presiona [Enter para salir]:"
+        read a
+        break
+        ;;
+        1)
+        lavado
+    esac
+}
+
 #function atiempo(){
 #    
 #}
@@ -17,8 +29,17 @@ function pdispcat(){
 #}
 
 read -p "Select:" selections
-case selection in
-    *)
-    pdispcat
-    ;;
-esac
+
+while true; do
+    case selection in
+        0)
+        pdispcat
+        echo -e "Presiona [Enter para salir]:"
+        read a
+        break
+        ;;
+        1)
+        lavado
+    esac
+done
+
