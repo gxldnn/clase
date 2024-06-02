@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function pdispcat(){
-    cat programas.txt | grep -A 1000 '^@' | awk '/^@/ {if (NR != 1) print ""; print; next} {print}'
+    cat programas.txt | grep "@" | awk {print $2, $3}
 
 }
 #function lavado(){
